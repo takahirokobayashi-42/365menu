@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  master_dish_id: 1
+  menu_genre_id: 1
+  name: MyString
+  image_id: MyString
+  count: 1
+
+two:
+  master_dish_id: 1
+  menu_genre_id: 1
+  name: MyString
+  image_id: MyString
+  count: 1

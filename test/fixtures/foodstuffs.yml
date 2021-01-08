@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  category_id: MyString
+  name: MyString
+  image_id: MyString
+  calory: 1
+  protein: 1
+  fat: 
+
+two:
+  category_id: MyString
+  name: MyString
+  image_id: MyString
+  calory: 1
+  protein: 1
+  fat: 

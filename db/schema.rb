@@ -10,7 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_08_091022) do
+ActiveRecord::Schema.define(version: 2021_01_08_095220) do
+
+  create_table "admins", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_admins_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.boolean "is_active", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "customers", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -27,6 +46,86 @@ ActiveRecord::Schema.define(version: 2021_01_08_091022) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_customers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
+  end
+
+  create_table "foodstuffs", force: :cascade do |t|
+    t.string "category_id"
+    t.string "name"
+    t.string "image_id"
+    t.integer "calory"
+    t.integer "protein"
+    t.integer "carbohydrate"
+    t.integer "fat"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "genres", force: :cascade do |t|
+    t.string "name"
+    t.boolean "is_active", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "master_dishes", force: :cascade do |t|
+    t.integer "foodstuff_id"
+    t.integer "Genre_id"
+    t.string "name"
+    t.string "image_id"
+    t.text "recipe"
+    t.integer "amount"
+    t.integer "count"
+    t.integer "total_calory"
+    t.integer "total_fat"
+    t.integer "total_carbohydrate"
+    t.integer "total_protein"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "master_menus", force: :cascade do |t|
+    t.integer "master_dish_id"
+    t.integer "menu_genre_id"
+    t.string "name"
+    t.string "image_id"
+    t.integer "count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "menu_genres", force: :cascade do |t|
+    t.string "name"
+    t.boolean "is_active", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "post_dishes", force: :cascade do |t|
+    t.integer "customer_id"
+    t.integer "foodstuff_id"
+    t.integer "genre_id"
+    t.string "name"
+    t.integer "amount"
+    t.integer "count"
+    t.string "image_id"
+    t.text "recipe"
+    t.integer "total_calory"
+    t.integer "total_fat"
+    t.integer "total_carbohydrate"
+    t.integer "total_protein"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "post_menus", force: :cascade do |t|
+    t.integer "customer_id"
+    t.integer "post_dish_id"
+    t.integer "menu_genre_id"
+    t.string "name"
+    t.integer "count"
+    t.string "image_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

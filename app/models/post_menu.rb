@@ -1,0 +1,2 @@
+class PostMenu < ApplicationRecord
+end

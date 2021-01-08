@@ -1,0 +1,2 @@
+class MasterMenu < ApplicationRecord
+end
