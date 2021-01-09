@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'g/categories'
   devise_for :admins
   devise_for :customers
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
@@ -12,15 +11,15 @@ Rails.application.routes.draw do
     resources :dishes
     resources :master_menus
     resources :master_dishes
-    resources :genres
+    resources :genres, except: [:show]
     resources :categories
-    resources :menucategories
+    resources :menu_genres
     resources :foodstuffs
     resources :customers, only: [:index, :show, :edit, :update]
     patch '/customers/:id/hide' => 'customers#hide'
     get '/', to: 'homes#top', as: :home
   end
-  
+
   resources :post_menus
   resources :post_dishes
   resources :master_menus, only: [:index, :show]
@@ -29,5 +28,5 @@ Rails.application.routes.draw do
   patch '/customers/:id/hide' => 'customers#hide'
   get '/customers/unsubscribe' => 'customers#unsubscribe'
   resources :foodstuffs, only: [:index, :show]
-  
+
 end

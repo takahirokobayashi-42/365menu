@@ -1,0 +1,2 @@
+module MenuGenresHelper
+end
