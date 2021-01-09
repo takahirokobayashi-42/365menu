@@ -1,0 +1,66 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+@import "bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'メイリオ','游ゴシック体', 'ヒラギノ角ゴ ProN W6','ヒラギノ角ゴ ProN W3';
+}
+
+
+.about__introduction{
+    text-align: center;
+    width: 80%;
+    min-height: 600px;
+    margin: auto;
+    background-size: 100% 100%;
+    background-image: url("about_image.jpg");
+}
+
+.about__introduction-text{
+   color: white;
+   font-weight: 600;
+   font-size: 30px;
+   width: 100%;
+   padding-top: 100px;
+   padding-bottom: 50px;
+}
+
+.about__introduction-text-sub{
+    color: white;
+    font-weight: 200;
+    font-size: 15px;
+}
+.about__sub-introduction{
+    text-align: center;
+    width: 100%;
+    padding-top: 50px;
+}
+
+.about__sub-introduction-head{
+    font-size: 30px;
+    font-weight: 400;
+}
+
+.about__sub-introduction-feature-icon{
+    color: green;
+    font-size: 5em;
+}
