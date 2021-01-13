@@ -1,0 +1,6 @@
+<div class="nested-fields">
+    <%= f.collection_select(:foodstuff_id, {}, :id, :name, {}) %>
+    <%= f.number_field :amount %>
+    <div>個</div>
+    <%= link_to_remove_association "削除", f %>
+</div>

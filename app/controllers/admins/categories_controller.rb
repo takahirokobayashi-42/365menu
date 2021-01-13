@@ -37,6 +37,6 @@ class Admins::CategoriesController < ApplicationController
 
   private
     def category_params
-      params.require(:category).permit(:name, :is_active)
+      params.require(:category).permit(:name, :category_id, :calory, :protein, :carbohydrate, :fat)
     end
 end

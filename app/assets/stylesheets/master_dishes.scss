@@ -1,3 +1,15 @@
 // Place all the styles related to the master_dishes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.masterdish-new {
+  display: flex;
+}
+
+.left-box{
+  width: 40%;
+}
+
+.right-box{
+  width: 60%;
+}
