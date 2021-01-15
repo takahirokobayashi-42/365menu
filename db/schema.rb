@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_08_095220) do
+ActiveRecord::Schema.define(version: 2021_01_15_051602) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -37,15 +37,21 @@ ActiveRecord::Schema.define(version: 2021_01_08_095220) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.string "last_name"
-    t.string "first_name"
-    t.string "kana_last_name"
-    t.string "kana_first_name"
     t.boolean "is_unsubscribed", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
     t.index ["email"], name: "index_customers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
+  end
+
+  create_table "dish_foodstuffs", force: :cascade do |t|
+    t.integer "master_dish_id"
+    t.integer "foodstuff_id"
+    t.integer "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["master_dish_id"], name: "index_dish_foodstuffs_on_master_dish_id"
   end
 
   create_table "foodstuffs", force: :cascade do |t|
@@ -69,7 +75,7 @@ ActiveRecord::Schema.define(version: 2021_01_08_095220) do
 
   create_table "master_dishes", force: :cascade do |t|
     t.integer "foodstuff_id"
-    t.integer "Genre_id"
+    t.integer "genre_id"
     t.string "name"
     t.string "image_id"
     t.text "recipe"
@@ -81,6 +87,15 @@ ActiveRecord::Schema.define(version: 2021_01_08_095220) do
     t.integer "total_protein"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "master_menu_recipes", force: :cascade do |t|
+    t.integer "master_menu_id"
+    t.integer "master_dish_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "amount"
+    t.index ["master_menu_id"], name: "index_master_menu_recipes_on_master_menu_id"
   end
 
   create_table "master_menus", force: :cascade do |t|

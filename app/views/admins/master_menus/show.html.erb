@@ -1,0 +1,26 @@
+<div class="">
+  <p><%= @master_menu.name %></p>
+  <%= attachment_image_tag @master_menu, :image, :fill, 170, 180, format: 'jpeg' %></br>
+  <p>材料(<%= @master_menu.count %>人分)</p>
+
+  <% @master_menu_recipes.each do |master_menu_recipe| %>
+    <% if master_menu_recipe.master_menu_id == @master_menu.id %>
+      <%= master_menu_recipe.master_dish.name %>
+      </br>
+    <% end %>
+  <% end %>
+  <div>
+    <%#= @total_calory %>kcal
+    <%#= @total_protein %>g
+    <%#= @total_carbohydrate %>g
+    <%#= @total_fat %>g
+  </div>
+  <div>
+    <%#= @master_menu.recipe %>
+  </div>
+  <div>
+    <%#= link_to edit_admins_master_menu_path(@master_menu) do %>
+    編集
+
+  </div>
+</div>

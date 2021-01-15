@@ -5,29 +5,35 @@ class Admins::MasterDishesController < ApplicationController
 
   def new
     @master_dish= MasterDish.new
-    @foodstuff = @master_dish.foodstuffs.build
+    @dish_foodstuff = @master_dish.dish_foodstuffs.build
   end
 
   def create
     @master_dish= MasterDish.new(master_dish_params)
+
     if @master_dish.save
       redirect_to admins_master_dishes_path
     else
       @master_dishes = MasterDish.all
-      render :index
+      redirect_to root_path
     end
   end
 
   def show
-    @master_dish=Masterdish.find(params[:id])
+    @master_dish=MasterDish.find(params[:id])
+    @dish_foodstuffs=DishFoodstuff.all
+    @total_calory = 0
+    @total_fat = 0
+    @total_carbohydrate = 0
+    @total_protein = 0
   end
 
   def edit
-    @master_dish= Masterdish.find(params[:id])
+    @master_dish= MasterDish.find(params[:id])
   end
 
   def update
-    @master_dish= Masterdish.find(params[:id])
+    @master_dish= MasterDish.find(params[:id])
     if @master_dish.update(master_dish_params)
       redirect_to admins_master_dish_path(@master_dish.id)
     else
@@ -36,7 +42,7 @@ class Admins::MasterDishesController < ApplicationController
   end
 
   def destroy
-    @master_dish= Masterdish.find(params[:id])
+    @master_dish= MasterDish.find(params[:id])
     if @master_dish.destroy
       redirect_to admins_master_dishes_path
     end
@@ -45,7 +51,7 @@ class Admins::MasterDishesController < ApplicationController
 
   private
     def master_dish_params
-      params.require(:master_dish).permit(:name, :genre_id, :foodstuff_id, :image_id, :recipe, :amount, :total_calory, :total_protein, 
-        :total_carbohydrate, :total_fat, foodstuffs_attributes: [:id, :category_id, :name, :image_id, :calory, :protein, :carbohydrate, :fat])
+      params.require(:master_dish).permit(:name, :genre_id, :image, :recipe, :amount, :total_calory, :total_protein, :count,
+        :total_carbohydrate, :total_fat, dish_foodstuffs_attributes: [:id, :foodstuff_id, :amount, :_destroy])
     end
 end

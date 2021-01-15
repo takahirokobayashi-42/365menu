@@ -15,10 +15,11 @@
 <!--  end-->
 
 
-<div class="masterdish-new">
 
+<%= form_with model: @master_dish, url: admins_master_dishes_path, method: :post, local:true do |f| %>
+  <div class="masterdish-new">
    <div class="left-box">
-      <%= form_with model: @master_dish, local:true do |f| %>
+
       <div class="left-box__dish-name">
         レシピ名
         <%= f.text_field :name, size: 40 %>
@@ -27,17 +28,12 @@
         <%= attachment_image_tag @master_dish, :image, fallback: "no-image.png", id: "img_prev", size:'350x250' %></br>
         <%= f.attachment_field :image, class: 'img_field' %>
       </div>
-    <% end %>
-
-  </div>
-  <div class="right-box">
-     <%= form_with model: @master_dish, local:true do |f| %>
-    <div class="right-box__genre">
-      ジャンル名<%= f.collection_select :Genre_id, Genre.where(is_active: 1), :id, :name, include_blank: "選択して下さい", size: 40 %>
     </div>
-    <% end %>
+  <div class="right-box">
+    <div class="right-box__genre">
+      ジャンル名<%= f.collection_select :genre_id, Genre.where(is_active: 1), :id, :name, include_blank: "選択して下さい", size: 40 %>
+    </div>
       <table id="table">
-        <%= form_with model: @master_dish, local:true do |f| %>
         <thead>
           <tr>
             <th>食材</th>
@@ -45,26 +41,37 @@
           </tr>
         </thead>
         <tbody>
+          <!--<tr>-->
+          <!--  <td><%#= f.collection_select :Genre_id, Foodstuff.all, :id, :name, include_blank: "選択して下さい", size: 40 %></td>-->
+          <!--  <td><%#=f.text_field :amount %>g</td>-->
+          <!--</tr>-->
+          <!--<tr>-->
+          <!--  <td><%#= f.collection_select :Genre_id, Foodstuff.all, :id, :name, include_blank: "選択して下さい", size: 40 %></td>-->
+          <!--  <td><%#=f.text_field :amount %>g</td>-->
+          <!--</tr>-->
           <tr>
-            <td><%= f.collection_select :Genre_id, Foodstuff.all, :id, :name, include_blank: "選択して下さい", size: 40 %></td>
-            <td><%=f.text_field :amount %>g</td>
+            <td>
+              <!-- 食材入力フィールド -->
+              <%= f.fields_for :dish_foodstuffs do |t| %>
+              <%= render "admins/master_dishes/dish_foodstuff_fields", f: t %>
+              <% end %>
+            </td>
           </tr>
           <tr>
-            <td><%= f.collection_select :Genre_id, Foodstuff.all, :id, :name, include_blank: "選択して下さい", size: 40 %></td>
-            <td><%=f.text_field :amount %>g</td>
+            <td>
+             <!-- 食材追加ボタン -->
+              <%= link_to_add_association "追加", f, :dish_foodstuffs %>
+            </td>
           </tr>
-          <!-- 食材入力フィールド -->
-  <%= f.fields_for :foodstuff do |t| %>
-    <%= render "admins/master_dish/foodstuff_fields", f: t %>
-  <% end %>
-
-  <!-- 食材追加ボタン -->
-  <%= link_to_add_association "追加", f, :foodstuff %>
-<% end %>
         </tbody>
-        <% end %>
+        <%= f.submit %>
+
       </table>
-      
     </div>
 </div>
+<div>
+  作り方</br>
+  <%= f.text_area :recipe %>
+</div>
+<% end %>
 <script src="app.js"></script>

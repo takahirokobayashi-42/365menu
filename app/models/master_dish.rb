@@ -1,7 +1,7 @@
 class MasterDish < ApplicationRecord
   belongs_to :genre
-  belongs_to :foodstuff, dependent: :destroy
-  accepts_nested_attributes_for :master_dishes
+  has_many :dish_foodstuffs, dependent: :destroy
+  accepts_nested_attributes_for :dish_foodstuffs
 
   attachment :image
 
