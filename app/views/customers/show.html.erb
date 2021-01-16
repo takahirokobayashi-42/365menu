@@ -1,0 +1,39 @@
+<div class="top">
+  <div class="container">
+    <div class="row">
+      <h5 class="col-lg-4 offset-lg-2 mt-5 mb-4"><strong class="customer-title">マイページ</strong></h5>
+      <h8><%= link_to "レシピを投稿する", new_master_dish_path %></h8>
+      <h8><%= link_to "メニューを投稿する", new_master_menu_path %></h8>
+    </div>
+    <div class="row mb-3">
+      <h5><strong class="col-lg-2">登録情報</strong></h5>
+      <%= link_to '編集する', edit_customer_path, class: "btn btn-1 px-4 mr-3" %>
+      <%= link_to 'パスワードを変更する', new_customer_password_path(current_customer), class: "btn btn-1 px-4" %>
+    </div>
+    <div class="row mb-4">
+      <table class="table col-lg-8 customer-table ml-3">
+        <tr>
+          <th>名前</th>
+          <td><%= current_customer.name %></td>
+        </tr>
+        <tr>
+          <th>メールアドレス</th>
+          <td><%= current_customer.email %></td>
+        </tr>
+      </table>
+    </div>
+    <div>
+      <h4>投稿したレシピ</h4>
+      <% @master_dishes.each do |master_dish| %>
+      <%= master_dish.name %>
+      <%= attachment_image_tag master_dish, :image, :fill, 170, 180, format: 'jpeg' %></br>
+      <% end %>
+    </div>
+    <div>
+      <h4>投稿したメニュー</h4>
+      <% @master_menus.each do |master_menu| %>
+      <%= master_menu.name %>
+      <%= attachment_image_tag master_menu, :image, :fill, 170, 180, format: 'jpeg' %></br>
+      <% end %>
+    </div>
+</div>

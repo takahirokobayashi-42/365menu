@@ -1,6 +1,8 @@
-class Customers::CustomersController < ApplicationController
-  def show
+class CustomersController < ApplicationController
 
+  def show
+    @master_dishes=MasterDish.where(customer_id: current_customer.id)
+    @master_menus=MasterMenu.where(customer_id: current_customer.id)
   end
 
   def edit

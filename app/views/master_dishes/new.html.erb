@@ -1,21 +1,3 @@
-<!--create_table "master_dishes", force: :cascade do |t|-->
-<!--    t.integer "foodstuff_id"-->
-<!--    t.integer "Genre_id"-->
-<!--    t.string "name"-->
-<!--    t.string "image_id"-->
-<!--    t.text "recipe"-->
-<!--    t.integer "amount"-->
-<!--    t.integer "count"-->
-<!--    t.integer "total_calory"-->
-<!--    t.integer "total_fat"-->
-<!--    t.integer "total_carbohydrate"-->
-<!--    t.integer "total_protein"-->
-<!--    t.datetime "created_at", null: false-->
-<!--    t.datetime "updated_at", null: false-->
-<!--  end-->
-
-
-
 <%= form_with model: @master_dish, url: admins_master_dishes_path, method: :post, local:true do |f| %>
   <div class="masterdish-new">
    <div class="left-box">
@@ -53,7 +35,7 @@
             <td>
               <!-- 食材入力フィールド -->
               <%= f.fields_for :dish_foodstuffs do |t| %>
-              <%= render "admins/master_dishes/dish_foodstuff_fields", f: t %>
+              <%= render "master_dishes/dish_foodstuff_fields", f: t %>
               <% end %>
             </td>
           </tr>
@@ -73,7 +55,8 @@
   作り方</br>
   <%= f.text_area :recipe %>
 </div>
-  <%= f.hidden_field :is_master, :value => true %>
+  <%= f.hidden_field :is_master, :value => false %>
+  <%= f.hidden_field :customer_id, :value => current_customer.id %>
    <%= f.submit %>
 <% end %>
 <script src="app.js"></script>

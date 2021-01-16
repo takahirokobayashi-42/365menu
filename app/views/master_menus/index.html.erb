@@ -1,0 +1,14 @@
+<div class="mastermenu">
+   <%#= form_with model: @foodstuff, url: admins_foodstuff_path(@foodstuff), method: :patch, local:true do |f| %>
+  <div class="mastermenu__name">
+    メニュー名
+    <% @master_menus.each do |master_menu| %>
+     <%= attachment_image_tag master_menu, :image, :fill, 170, 180, format: 'jpeg' %></br>
+              <%= link_to admins_master_menu_path(master_menu.id) do %>
+                <%= master_menu.name %></br>
+              <% end %>
+            <% end %>
+  </div>
+  <div class="mastermenu__index">
+  </div>
+</div>

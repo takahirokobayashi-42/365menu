@@ -1,23 +1,6 @@
-<!--create_table "master_dishes", force: :cascade do |t|-->
-<!--    t.integer "foodstuff_id"-->
-<!--    t.integer "Genre_id"-->
-<!--    t.string "name"-->
-<!--    t.string "image_id"-->
-<!--    t.text "recipe"-->
-<!--    t.integer "amount"-->
-<!--    t.integer "count"-->
-<!--    t.integer "total_calory"-->
-<!--    t.integer "total_fat"-->
-<!--    t.integer "total_carbohydrate"-->
-<!--    t.integer "total_protein"-->
-<!--    t.datetime "created_at", null: false-->
-<!--    t.datetime "updated_at", null: false-->
-<!--  end-->
 
-
-
-<%= form_with model: @master_dish, url: admins_master_dishes_path, method: :post, local:true do |f| %>
-  <div class="masterdish-new">
+   <%= form_with model: @post_dish, url: admins_post_dish_path(@post_dish), method: :patch, local:true do |f| %>
+           <div class="masterdish-new">
    <div class="left-box">
 
       <div class="left-box__dish-name">
@@ -25,7 +8,7 @@
         <%= f.text_field :name, size: 40 %>
       </div>
       <div class"left-boxdish-image">
-        <%= attachment_image_tag @master_dish, :image, fallback: "no-image.png", id: "img_prev", size:'350x250' %></br>
+        <%= attachment_image_tag @post_dish, :image, fallback: "no-image.png", id: "img_prev", size:'350x250' %></br>
         <%= f.attachment_field :image, class: 'img_field' %>
       </div>
     </div>
@@ -53,7 +36,7 @@
             <td>
               <!-- 食材入力フィールド -->
               <%= f.fields_for :dish_foodstuffs do |t| %>
-              <%= render "admins/master_dishes/dish_foodstuff_fields", f: t %>
+              <%= render "admins/post_dishes/dish_foodstuff_fields", f: t %>
               <% end %>
             </td>
           </tr>
@@ -64,7 +47,7 @@
             </td>
           </tr>
         </tbody>
-
+        <%= f.submit %>
 
       </table>
     </div>
@@ -73,7 +56,9 @@
   作り方</br>
   <%= f.text_area :recipe %>
 </div>
-  <%= f.hidden_field :is_master, :value => true %>
-   <%= f.submit %>
 <% end %>
-<script src="app.js"></script>
+
+        <%= link_to admins_post_dish_path(@post_dish) do %>
+    戻る
+    <% end %>
+    <script src="app.js"></script>

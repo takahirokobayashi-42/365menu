@@ -1,4 +1,4 @@
-class Admins::MasterDishesController < ApplicationController
+class MasterDishesController < ApplicationController
   def index
     @master_dishes = MasterDish.all
   end
@@ -11,12 +11,8 @@ class Admins::MasterDishesController < ApplicationController
   def create
     @master_dish= MasterDish.new(master_dish_params)
 
-    if @master_dish.save
-      if admin_signed_in?
-        redirect_to admins_master_dishes_path
-      else
-        redirect_to master_dishes_path
-      end
+    if @master_dish.save!
+      redirect_to master_dishes_path
     else
       @master_dishes = MasterDish.all
       redirect_to root_path
@@ -25,6 +21,7 @@ class Admins::MasterDishesController < ApplicationController
 
   def show
     @master_dish=MasterDish.find(params[:id])
+    @post_comment=PostComment.new
     @dish_foodstuffs=DishFoodstuff.all
     @total_calory = 0
     @total_fat = 0
@@ -39,7 +36,7 @@ class Admins::MasterDishesController < ApplicationController
   def update
     @master_dish= MasterDish.find(params[:id])
     if @master_dish.update(master_dish_params)
-      redirect_to admins_master_dish_path(@master_dish.id)
+      redirect_to master_dish_path(@master_dish.id)
     else
       render :edit
     end
@@ -48,7 +45,7 @@ class Admins::MasterDishesController < ApplicationController
   def destroy
     @master_dish= MasterDish.find(params[:id])
     if @master_dish.destroy
-      redirect_to admins_master_dishes_path
+      redirect_to master_dishes_path
     end
   end
 

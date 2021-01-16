@@ -1,0 +1,73 @@
+<div class="">
+  <p><%= @master_dish.name %></p>
+  <%= attachment_image_tag @master_dish, :image, :fill, 170, 180, format: 'jpeg' %></br>
+  <p>材料(<%= @master_dish.count %>人分)</p>
+
+  <% @dish_foodstuffs.each do |dish_foodstuff| %>
+    <% if dish_foodstuff.master_dish_id == @master_dish.id %>
+      <%= dish_foodstuff.foodstuff.name %>
+      <%= dish_foodstuff.amount %>g
+      <!--foodstuff（食材）の　各栄養素　×　各重量　をeachで回しtotalに代入-->
+      <% @total_protein += (dish_foodstuff.foodstuff.protein*(dish_foodstuff.amount/100)).floor %>
+      <% @total_carbohydrate += (dish_foodstuff.foodstuff.carbohydrate*(dish_foodstuff.amount/100)).floor %>
+      <% @total_fat += (dish_foodstuff.foodstuff.fat*(dish_foodstuff.amount/100)).floor %>
+      <% @total_calory += dish_foodstuff.foodstuff.calory*(dish_foodstuff.amount/100) %>
+      </br>
+    <% end %>
+  <% end %>
+  <div>
+    <!--上記の栄養素を表示-->
+    <%= @total_calory %>kcal
+    <%= @total_protein %>g
+    <%= @total_carbohydrate %>g
+    <%= @total_fat %>g
+  </div>
+  <!--作り方-->
+  <div>
+    <%= @master_dish.recipe %>
+  </div>
+  <!--コメント-->
+  <div class="comments">
+    <p>コメント件数：<%= @master_dish.post_comments.count %></p>
+    <% @master_dish.post_comments.each do |post_comment| %>
+      <%= post_comment.customer.name %>
+      <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
+      <% if post_comment.customer == current_customer %>
+        <div class="comment-delete">
+          <%= link_to "削除", master_dish_post_comment_path(post_comment.master_dish, post_comment), method: :delete %>
+        </div>
+      <% end %>
+    <% end %>
+     <% if @master_dish.favorited_by?(current_customer) %>
+    <p>
+      <%= link_to master_dish_favorites_path(@master_dish), method: :delete do %>
+        ♥<%= @master_dish.favorites.count %> いいね
+      <% end %>
+    </p>
+    <% else %>
+    <p>
+      <%= link_to master_dish_favorites_path(@master_dish), method: :post do %>
+        ♡<%= @master_dish.favorites.count %> いいね
+      <% end %>
+    </p>
+  <% end %>
+  </div>
+  <div class="new-comment">
+    <%= form_with(model:[@master_dish, @post_comment], local: true) do |f| %>
+      <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
+      <%= f.submit "送信する" %>
+
+    <% end %>
+  </div>
+
+
+
+  <div>
+    <% if @master_dish.customer_id == current_customer.id %>
+    <%= link_to "編集", edit_master_dish_path(@master_dish) %>
+    <% end %>
+    <%= link_to master_dishes_path do %>
+    戻る
+    <% end %>
+  </div>
+</div>

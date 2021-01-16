@@ -1,0 +1,16 @@
+<div class="masterdish">
+   <%#= form_with model: @foodstuff, url: _foodstuff_path(@foodstuff), method: :patch, local:true do |f| %>
+  <div class="masterdish__name">
+    レシピ名
+    <% @master_dishes.each do |master_dish| %>
+     <%= attachment_image_tag master_dish, :image, :fill, 170, 180, format: 'jpeg' %></br>
+              <%= link_to master_dish_path(master_dish.id) do %>
+                <%= master_dish.name %></br>
+              <% end %>
+            <% end %>
+  </div>
+  <div class="masterdish__index">
+
+
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="">
+  <p><%= @post_dish.name %></p>
+  <%= attachment_image_tag @post_dish, :image, :fill, 170, 180, format: 'jpeg' %></br>
+  <p>材料(<%= @post_dish.count %>人分)</p>
+
+  <% @dish_foodstuffs.each do |dish_foodstuff| %>
+    <% if dish_foodstuff.post_dish_id == @post_dish.id %>
+      <%= dish_foodstuff.foodstuff.name %>
+      <%= dish_foodstuff.amount %>g
+      <% @total_protein += (dish_foodstuff.foodstuff.protein*(dish_foodstuff.amount/100)).floor %>
+      <% @total_carbohydrate += (dish_foodstuff.foodstuff.carbohydrate*(dish_foodstuff.amount/100)).floor %>
+      <% @total_fat += (dish_foodstuff.foodstuff.fat*(dish_foodstuff.amount/100)).floor %>
+      <% @total_calory += dish_foodstuff.foodstuff.calory*(dish_foodstuff.amount/100) %>
+      </br>
+    <% end %>
+  <% end %>
+  <div>
+    <%= @total_calory %>kcal
+    <%= @total_protein %>g
+    <%= @total_carbohydrate %>g
+    <%= @total_fat %>g
+  </div>
+  <div>
+    <%= @post_dish.recipe %>
+  </div>
+  <div>
+    <%= link_to edit_admins_post_dish_path(@post_dish) do %>
+    編集
+    <% end %>
+  </div>
+</div>

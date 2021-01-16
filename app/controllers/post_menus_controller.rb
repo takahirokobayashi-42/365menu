@@ -1,0 +1,2 @@
+class PostMenusController < ApplicationController
+end

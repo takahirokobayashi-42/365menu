@@ -1,14 +1,15 @@
 <header>
-  <nav class="nav navbar-nav title">
-   <ul class="header-ul justify-content-around">
-     <div class="logo pull-left">
+  <nav class="nav navbar">
+   <ul class="navbar__title">
+     <div class="navbar__title-logo">
     <% if admin_signed_in? %>
       <%= link_to image_tag('logo.png'), admins_homes_top_path, :width => '10', :height => '10'%>
     <% else %>
       <%= link_to image_tag('logo.png'), '/', :width => '10', :height => '10', id: "customer_logo"%>
     <% end %>
      </div>
-   </ul>
+  </ul>
+
 
     <!--ul class="nav navbar-expand-lg justify-content-around"-->
 
@@ -34,7 +35,8 @@
       <!--会員がログインしているとき-->
 
       <% elsif customer_signed_in? %>
-
+      <div class=""
+      <ul>
       <li>
         <h3>ようこそ、<%= current_customer.name %>さん！</h3>
       </li>
@@ -42,14 +44,15 @@
         <%= link_to "マイページ", customer_path(current_customer), class: "btn btn-malformation btn-outline-secondary btn-sm w-auto" %>
       </li>
       <li>
-        <%#= link_to "商品一覧", customers_items_path, class: "btn btn-malformation btn-outline-secondary btn-sm w-auto" %>
+        <%= link_to "一品一覧", master_dishes_path, class: "btn btn-malformation btn-outline-secondary btn-sm w-auto" %>
       </li>
       <li>
-        <%#= link_to "カート", customers_cart_items_path, class: "btn btn-malformation btn-outline-secondary btn-sm w-auto" %>
+        <%= link_to "メニュー一覧", master_menus_path, class: "btn btn-malformation btn-outline-secondary btn-sm w-auto" %>
       </li>
       <li>
         <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "btn btn-malformation btn-outline-secondary btn-sm w-auto" %>
       </li>
+      </ul>
 
       <% else %>
       <!--ログインしていないとき-->
@@ -67,5 +70,6 @@
       </li>
       <% end %>
     </ul>
+
   </nav>
 </header>

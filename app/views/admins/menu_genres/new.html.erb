@@ -64,7 +64,7 @@
             </td>
           </tr>
         </tbody>
-
+        <%= f.submit %>
 
       </table>
     </div>
@@ -73,7 +73,5 @@
   作り方</br>
   <%= f.text_area :recipe %>
 </div>
-  <%= f.hidden_field :is_master, :value => true %>
-   <%= f.submit %>
 <% end %>
 <script src="app.js"></script>

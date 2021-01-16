@@ -22,8 +22,11 @@ Rails.application.routes.draw do
 
   resources :post_menus
   resources :post_dishes
-  resources :master_menus, only: [:index, :show]
-  resources :master_dishes, only: [:index, :show]
+  resources :master_menus
+  resources :master_dishes do
+    resource :favorites, only: [:create, :destroy]
+    resources :post_comments, only: [:create, :destroy]
+  end
   resources :customers, only: [:show, :edit, :update]
   patch '/customers/:id/hide' => 'customers#hide'
   get '/customers/unsubscribe' => 'customers#unsubscribe'

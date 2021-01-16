@@ -1,4 +1,4 @@
-class Admins::MasterMenusController < ApplicationController
+class MasterMenusController < ApplicationController
   def index
     @master_menus = MasterMenu.all
   end
