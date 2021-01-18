@@ -1,3 +1,51 @@
 // Place all the styles related to the customers controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.customer-show{
+  &__title{
+    margin-left: 50px;
+    font-size: 40px
+  }
+  &__head{
+    text-align: right;
+    p{
+      display: inline-block;
+      text-align: right;}
+  }
+
+  &__introduction{
+    background-color: white;
+    width: 60%;
+    margin: auto;
+    margin-bottom: 30px;
+
+    .introduction__table{
+      margin: auto;
+      td, th{
+        padding: 20px 10px 20px 0;
+        text-align: center;
+      }
+
+      tr:first-child{
+        border-bottom: 1px solid;
+      }
+    }
+  }
+  &__master-dish{
+    background-color: white;
+    .master_dish__wrap{
+      margin: auto;
+    }
+  }
+}
+.master-dish__wrap--element{
+  display: inline-block;
+  min-width: 200px;
+  height: 200px;
+  background-color: red;
+  margin-right: 50px;
+}
+.master-dish__wrap--element:first-child{
+  margin-left: 50px;
+}

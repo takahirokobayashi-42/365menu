@@ -10,7 +10,7 @@ class CustomersController < ApplicationController
 
   def update
     if current_customer.update(customer_params)
-      redirect_to customers_customer_path
+      redirect_to customer_path
     else
       render :edit
     end

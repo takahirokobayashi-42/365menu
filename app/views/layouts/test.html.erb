@@ -1,32 +1,17 @@
-<header>
-        <div class="header-content">
-          <%= link_to image_tag("img_logo.png", class: "logo"), user_path(current_user) %>
-          <%= form_with url: users_search_path, method: :get, local: true, class: 'search-form' do |f| %>
-            <%= f.text_field :content, :placeholder => "-IDを入力してください-" %>
-            <%= f.button type: 'submit', class: "search-submit" do %>
-              <i class="fas fa-search"></i>
-            <% end %>
-          <% end %>
-          <ul class="nav-ul">
-            <li><%= link_to 'RAKU NOMIの使い方', home_about_path, class: 'btn btn-nav' %></li>
-            <% if unchecked_notifications.any? %>
-              <i class="fa fa-circle notification-icon" style="color: red;"></i>
-            <% end %>
-            <li><%= link_to "ToDoリスト", user_tasks_path(current_user), class: 'btn btn-nav' %></li>
-            <li><%= link_to "通知", notifications_path, class: 'btn btn-nav' %></li>
-            <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'btn btn-nav' %></li>
+<header class="site-header">
+      <div class="wrapper site-header__wrapper">
+        <a href="#" class="brand">Brand</a>
+        <nav class="nav">
+          <button class="nav__toggle" aria-expanded="false" type="button">
+            menu
+          </button>
+          <ul class="nav__wrapper">
+            <li class="nav__item"><a href="#">Home</a></li>
+            <li class="nav__item"><a href="#">About</a></li>
+            <li class="nav__item"><a href="#">Services</a></li>
+            <li class="nav__item"><a href="#">Hire us</a></li>
+            <li class="nav__item"><a href="#">Contact</a></li>
           </ul>
-        </div>
-      </header>
-    <% else %>
-      <header>
-        <div class="header-content">
-          <%= link_to image_tag("img_logo.png", class: "logo"), root_path %>
-          <ul>
-            <li><%= link_to 'RAKU NOMIの使い方', home_about_path, class: 'btn btn-nav' %></li>
-            <li><%= link_to '新規登録', new_user_registration_path, class: 'btn btn-nav' %></li>
-            <li><%= link_to 'ログイン', new_user_session_path, class: 'btn btn-nav' %></li>
-          </ul>
-        </div>
-      </header>
-    <% end %>
+        </nav>
+      </div>
+    </header>
