@@ -6,8 +6,8 @@
     </div>
     <div class="customer-show__introduction">
       <h5 class="customer-show__introduction--title"><strong>登録情報</strong></h5>
-      <%= link_to '編集する', edit_customer_path, class: "customer-show__introduction--btn" %>
-      <%= link_to 'パスワードを変更する', new_customer_password_path(current_customer), class: "customer-show__introduction--btn" %>
+      <%= link_to '編集する', edit_customer_path, class: "btn customer-show__introduction--btn" %>
+      <%= link_to 'パスワードを変更する', new_customer_password_path(current_customer), class: "btn customer-show__introduction--btn" %>
 
       <table class="introduction__table">
         <tr>
@@ -23,19 +23,36 @@
     <div class="customer-show__master-dish">
       <h4>投稿したレシピ</h4>
       <div class="master-dish__wrap">
-        <% @master_dishes.each do |master_dish| %>
+        <% @master_dishes.where(customer_id: customer_id).each do |master_dish| %>
         <div class="master-dish__wrap--element">
-          <p><%= master_dish.name %></p>
+          <%= link_to master_dish_path(master_dish) do %>
+            <p><%= master_dish.name %></p>
+          <% end %>
+          <p>作成日：<%= master_dish.created_at.strftime('%m/%d') %></p>
           </p><%= attachment_image_tag master_dish, :image, :fill, 170, 180, format: 'jpeg' %></p>
         </div>
         <% end %>
+        <%= paginate(@master_dishes) %>
+
       </div>
+
     </div>
-    <div>
+    <div class="customer-show__master-menu">
       <h4>投稿したメニュー</h4>
-      <% @master_menus.each do |master_menu| %>
-      <%= master_menu.name %>
-      <%= attachment_image_tag master_menu, :image, :fill, 170, 180, format: 'jpeg' %></br>
-      <% end %>
+
+       <div class="master-menu__wrap">
+        <% @master_menus.each do |master_menu| %>
+        <div class="master-menu__wrap--element">
+          <%= link_to master_menu_path(master_menu) do %>
+            <p><%= master_menu.name %></p>
+          <% end %>
+          <p>作成日：<%= master_menu.created_at.strftime('%m/%d') %></p>
+          </p><%= attachment_image_tag master_menu, :image, :fill, 170, 180, format: 'jpeg' %></p>
+        </div>
+        <% end %>
+        <%= paginate(@master_menus) %>
+
+      </div>
+
     </div>
-</div>
+

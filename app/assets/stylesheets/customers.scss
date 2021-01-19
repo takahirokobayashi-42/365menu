@@ -2,6 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+// show
 .customer-show{
   &__title{
     margin-left: 50px;
@@ -19,6 +20,14 @@
     width: 60%;
     margin: auto;
     margin-bottom: 30px;
+    &--title{
+      padding-left: 20px;
+      padding-top: 20px;
+    }
+    .btn{
+      margin-left: 20px;
+      background-color: #DFE9F2;
+    }
 
     .introduction__table{
       margin: auto;
@@ -34,7 +43,14 @@
   }
   &__master-dish{
     background-color: white;
+    margin-bottom: 50px;
     .master_dish__wrap{
+      margin: auto;
+    }
+  }
+  &__master-menu{
+    background-color: white;
+    .master_menu__wrap{
       margin: auto;
     }
   }
@@ -45,7 +61,56 @@
   height: 200px;
   background-color: red;
   margin-right: 50px;
+  margin-bottom: 25px;
+  margin-top: 25px;
+  p{
+    margin: 0;
+  }
 }
 .master-dish__wrap--element:first-child{
   margin-left: 50px;
+}
+
+.master-menu__wrap--element{
+  display: inline-block;
+  min-width: 200px;
+  height: 200px;
+  background-color: red;
+  margin-right: 50px;
+  margin-bottom: 25px;
+  margin-top: 25px;
+  p{
+    margin: 0;
+  }
+}
+.master-menu__wrap--element:first-child{
+  margin-left: 50px;
+}
+
+
+// edit
+.customer-edit{
+  h5{
+    text-align: center;
+  }
+  &__element{
+    background-color: white;
+    width: 60%;
+    margin: auto;
+
+    .element__form-group{
+      text-align: center;
+      }
+    .element__form-btn{
+       .btn{
+         background-color: #DFE9F2;
+         margin-left:20px;
+         margin-bottom:20px;
+       }
+       .btn:nth-child(2) {
+         background-color: red;
+         color: white;
+       }
+    }
+  }
 }

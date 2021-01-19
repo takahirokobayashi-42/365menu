@@ -4,10 +4,10 @@
     メニュー名
     <% @master_menus.each do |master_menu| %>
       <%= attachment_image_tag master_menu, :image, :fill, 170, 180, format: 'jpeg' %></br>
-      <%= link_to admins_master_menu_path(master_menu.id) do %>
+      <%= link_to master_menu_path(master_menu.id) do %>
         <%= master_menu.name %></br>
       <% end %>
-      <% if master_menu.is_master==False %>
+      <% if master_menu.is_master==false %>
         <% maste_menu.customer.name %>
       <% end %>
     <% end %>

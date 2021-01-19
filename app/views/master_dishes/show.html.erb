@@ -22,6 +22,15 @@
     <%= @total_carbohydrate %>g
     <%= @total_fat %>g
   </div>
+  投稿者
+  <% if @master_dish.is_master == true %>
+  365menu
+  <% else %>
+  <%= Customer.find(@master_dish.customer_id).name %>
+  <% end %>
+  <div>
+
+  </div>
   <!--作り方-->
   <div>
     <%= @master_dish.recipe %>

@@ -2,19 +2,84 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+// new
 .masterdish-new {
-  display: flex;
-}
+  @media(min-width: 950px){
+    display: flex;
+  }
 
 .left-box{
-  width: 40%;
-}
+  &__dish-name{
+    margin-bottom: 20px;
+    }
+  @media(min-width: 950px){
+    width: 50%;
+    margin-left: 50px;
+    &__dish-name{
+      margin-bottom: 20px;
+      }
+    }
+  }
 
 .right-box{
-  width: 60%;
+  @media(min-width: 950px){
+  width: 50%;
+  }
+}
 }
 
 textarea{
   height: 7em;
-  width: 50%;
+  width: 80%;
+  @media(min-width: 950px){
+    height: 7em;
+    width: 50%;
+  }
+}
+
+.master-dish__recipe{
+  margin-top: 30px;
+  @media(min-width: 950px){
+  margin-left: 50px;
+  margin-top: 30px;
+  }
+}
+
+// index
+.master-dish-index{
+  width: 100%;
+  &__info{
+    margin: auto;
+    width: 70%;
+    background-color: white;
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+
+}
+
+.master-dish-index__info{
+   display: flex;
+  flex-wrap: wrap;
+}
+
+.info__table{
+  margin: auto;
+  margin-top: 100px;
+  width: 400px;
+
+}
+
+.info__table--element{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  border: solid ;
+  border-radius: 100px;
+  background-color: #F9FBC5;
+  .test{
+    test-align:center;
+    color: green;
+  }
 }

@@ -1,6 +1,7 @@
 class MasterDishesController < ApplicationController
   def index
     @master_dishes = MasterDish.all
+    @master_dishes=MasterDish.page(params[:page]).per(6)
   end
 
   def new
