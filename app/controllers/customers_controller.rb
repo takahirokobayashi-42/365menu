@@ -5,6 +5,7 @@ class CustomersController < ApplicationController
     @master_dishes=MasterDish.page(params[:page]).reverse_order.per(4)
     @master_menus=MasterMenu.where(customer_id: current_customer.id)
     @master_menus=MasterMenu.page(params[:page]).reverse_order.per(4)
+    @customer=Customer.find(params[:id])
   end
 
   def edit

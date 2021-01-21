@@ -23,7 +23,8 @@
     <div class="customer-show__master-dish">
       <h4>投稿したレシピ</h4>
       <div class="master-dish__wrap">
-        <% @master_dishes.where(customer_id: customer_id).each do |master_dish| %>
+        <!--レシピからwhereでcustomer_idを指定して表示させている-->
+        <% @master_dishes.where(customer_id: @customer).each do |master_dish| %>
         <div class="master-dish__wrap--element">
           <%= link_to master_dish_path(master_dish) do %>
             <p><%= master_dish.name %></p>
@@ -41,13 +42,13 @@
       <h4>投稿したメニュー</h4>
 
        <div class="master-menu__wrap">
-        <% @master_menus.each do |master_menu| %>
+        <% @master_menus.where(customer_id: @customer).each do |master_menu| %>
         <div class="master-menu__wrap--element">
           <%= link_to master_menu_path(master_menu) do %>
             <p><%= master_menu.name %></p>
           <% end %>
           <p>作成日：<%= master_menu.created_at.strftime('%m/%d') %></p>
-          </p><%= attachment_image_tag master_menu, :image, :fill, 170, 180, format: 'jpeg' %></p>
+          </p><%= attachment_image_tag master_menu, :image, :fill, 100, 100, format: 'jpeg' %></p>
         </div>
         <% end %>
         <%= paginate(@master_menus) %>

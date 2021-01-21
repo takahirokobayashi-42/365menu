@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_16_144530) do
+ActiveRecord::Schema.define(version: 2021_01_20_101308) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -48,10 +48,9 @@ ActiveRecord::Schema.define(version: 2021_01_16_144530) do
   create_table "dish_foodstuffs", force: :cascade do |t|
     t.integer "master_dish_id"
     t.integer "foodstuff_id"
-    t.integer "amount"
+    t.float "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "post_dish_id"
     t.index ["master_dish_id"], name: "index_dish_foodstuffs_on_master_dish_id"
   end
 
@@ -66,10 +65,10 @@ ActiveRecord::Schema.define(version: 2021_01_16_144530) do
     t.string "category_id"
     t.string "name"
     t.string "image_id"
-    t.integer "calory"
-    t.integer "protein"
-    t.integer "carbohydrate"
-    t.integer "fat"
+    t.float "calory"
+    t.float "protein"
+    t.float "carbohydrate"
+    t.float "fat"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -87,12 +86,11 @@ ActiveRecord::Schema.define(version: 2021_01_16_144530) do
     t.string "name"
     t.string "image_id"
     t.text "recipe"
-    t.integer "amount"
     t.integer "count"
-    t.integer "total_calory"
-    t.integer "total_fat"
-    t.integer "total_carbohydrate"
-    t.integer "total_protein"
+    t.integer "total_calory", default: 0
+    t.integer "total_fat", default: 0
+    t.integer "total_carbohydrate", default: 0
+    t.integer "total_protein", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "is_master", default: true
@@ -131,34 +129,6 @@ ActiveRecord::Schema.define(version: 2021_01_16_144530) do
     t.text "comment"
     t.integer "customer_id"
     t.integer "master_dish_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "post_dishes", force: :cascade do |t|
-    t.integer "customer_id"
-    t.integer "foodstuff_id"
-    t.integer "genre_id"
-    t.string "name"
-    t.integer "amount"
-    t.integer "count"
-    t.string "image_id"
-    t.text "recipe"
-    t.integer "total_calory"
-    t.integer "total_fat"
-    t.integer "total_carbohydrate"
-    t.integer "total_protein"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "post_menus", force: :cascade do |t|
-    t.integer "customer_id"
-    t.integer "post_dish_id"
-    t.integer "menu_genre_id"
-    t.string "name"
-    t.integer "count"
-    t.string "image_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

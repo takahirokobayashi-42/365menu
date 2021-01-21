@@ -1,4 +1,4 @@
-<%= form_with model: @master_dish, url: admins_master_dishes_path, method: :post, local:true do |f| %>
+<%= form_with model: @master_dish, url: master_dishes_path, method: :post, local:true do |f| %>
   <div class="masterdish-new">
    <div class="left-box">
       <div class="left-box__dish-name">
@@ -50,7 +50,8 @@
   <%= f.text_area :recipe %></br>
   <%= f.submit "登録する" %>
 </div>
-  <%= f.hidden_field :is_master, :value => false %>
-  <%= f.hidden_field :customer_id, :value => current_customer.id %>
+  <% f.hidden_field :is_master, :value => false %>
+  <% f.hidden_field :customer_id, :value => current_customer.id %>
+
 <% end %>
 <script src="app.js"></script>

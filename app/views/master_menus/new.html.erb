@@ -53,6 +53,9 @@
 </div>
 <div>
 
+<%= f.hidden_field :is_master, :value => false %>
+<%= f.hidden_field :customer_id, :value => current_customer.id %>
+
 </div>
 <% end %>
 <script src="app.js"></script>

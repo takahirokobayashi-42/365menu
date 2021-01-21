@@ -75,12 +75,15 @@
   display: inline-block;
   min-width: 200px;
   height: 200px;
-  background-color: red;
+  border: solid;
+  background-color: whitesmoke;
   margin-right: 50px;
   margin-bottom: 25px;
   margin-top: 25px;
+  text-align: center;
   p{
     margin: 0;
+    margin-top: 5px;
   }
 }
 .master-menu__wrap--element:first-child{

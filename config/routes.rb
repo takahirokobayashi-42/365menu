@@ -6,8 +6,6 @@ Rails.application.routes.draw do
   get '/about' => 'homes#about'
 
   namespace :admins do
-    resources :post_menus, only: [:index, :show, :destroy]
-    resources :post_dishes, only: [:index, :show, :destroy]
     resources :dishes
     resources :master_menus
     resources :master_dishes
@@ -20,8 +18,6 @@ Rails.application.routes.draw do
     get '/', to: 'homes#top', as: :home
   end
 
-  resources :post_menus
-  resources :post_dishes
   resources :master_menus
   resources :master_dishes do
     resource :favorites, only: [:create, :destroy]
