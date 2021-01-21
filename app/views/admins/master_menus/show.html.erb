@@ -1,145 +1,57 @@
-<div class="">
-  <p><%= @master_menu.name %></p>
-  <%= attachment_image_tag @master_menu, :image, :fill, 170, 180, format: 'jpeg' %></br>
-  <p>材料(<%= @master_menu.count %>人分)</p>
-
-  <% @master_menu_recipes.each do |master_menu_recipe| %>
-    <% if master_menu_recipe.master_menu_id == @master_menu.id %>
-      <%= master_menu_recipe.master_dish.name %>
-      </br>
-    <% end %>
-  <% end %>
-  <div>
-    <%#= @total_calory %>kcal
-    <%#= @total_protein %>g
-    <%#= @total_carbohydrate %>g
-    <%#= @total_fat %>g
-  </div>
-  <div>
-    <%#= @master_menu.recipe %>
-  </div>
-  <div>
-    <%#= link_to edit_admins_master_menu_path(@master_menu) do %>
-    編集
-
-  </div>
-</div>
-
-
-
-
-
-
-
-
 <div class="master-dish__show">
   <div class="show__head">
-  <p class="show__head--title"><%= @master_dish.name %></p>
+  <p class="show__head--title"><%= @master_menu.name %></p>
   <p class="show__head--post">投稿者
-    <% if @master_dish.is_master == true %>
+    <% if @master_menu.is_master == true %>
     365menu
     <% else %>
-    <%= Customer.find(@master_dish.customer_id).name %>
+    <%= Customer.find(@master_menu.customer_id).name %>
     <% end %>
   </p>
   <p class="show__head--edit">
-    <% if @master_dish.customer_id == current_customer.id %>
-    <%= link_to "編集", edit_master_dish_path(@master_dish) %>
+    <% if @master_menu.is_master == true %>
+      <%= link_to "編集", edit_master_menu_path(@master_menu) %>
     <% end %>
   </p>
-  <%= attachment_image_tag @master_dish, :image, :fill, 400, 400, format: 'jpeg' %></br>
+  <%= attachment_image_tag @master_menu, :image, :fill, 400, 400, format: 'jpeg' %></br>
   </div>
 
   <div class="show__foodstuff">
-    <p>材料(<%= @master_dish.count %>人分)</p>
-  <table>
-  <% @dish_foodstuffs.each do |dish_foodstuff| %>
-    <% if dish_foodstuff.master_dish_id == @master_dish.id %>
-    <tr>
-      <td><%= dish_foodstuff.foodstuff.name %></td>
-      <td><%= dish_foodstuff.amount %>g</td>
-      <!--foodstuff（食材）の　各栄養素　×　各重量　をeachで回しtotalに代入-->
-      <% @total_protein += (dish_foodstuff.foodstuff.protein*(dish_foodstuff.amount/100)).floor %>
-      <% @total_carbohydrate += (dish_foodstuff.foodstuff.carbohydrate*(dish_foodstuff.amount/100)).floor %>
-      <% @total_fat += (dish_foodstuff.foodstuff.fat*(dish_foodstuff.amount/100)).floor %>
-      <% @total_calory += dish_foodstuff.foodstuff.calory*(dish_foodstuff.amount/100) %>
+    <p>献立(<%= @master_menu.count %>人分)</p>
+    <table>
+      <% @master_menu_recipes.each do |master_menu_recipe| %>
+      <tr>
+        <td>
+          <%= link_to master_dish_path(master_menu_recipe.master_dish_id) do %>
+          <%= master_menu_recipe.master_dish.name %>
+          <% end %>
+        </td>
       </tr>
-    <% end %>
-  <% end %>
-  </table>
+      <% end %>
+    </table>
   </div>
-  </div>
-  <div class="master-dish__show2">
+</div>
+<div class="master-dish__show2">
   <div class="master-dish__show2--nutrients">
+    <p>1人前当たり</p>
     <table>
       <!--上記の栄養素を表示-->
       <tr>
-        <td>カロリー:<%= @total_calory %>kcal</td>
+        <td>カロリー:<%= @master_menu.master_dishes.sum(:total_calory)/(@master_menu.master_dishes.count) %>kcal</td>
       </tr>
       <tr>
-        <td>タンパク質:<%= @total_protein %>g</td>
+        <td>タンパク質:<%= @master_menu.master_dishes.sum(:total_protein) %>g</td>
       </tr>
       <tr>
-        <td>炭水化物:<%= @total_carbohydrate %>g</td>
+        <td>炭水化物:<%= @master_menu.master_dishes.sum(:total_carbohydrate) %>g</td>
       </tr>
       <tr>
-        <td>脂質:<%= @total_fat %>g</td>
+        <td>脂質:<%= @master_menu.master_dishes.sum(:total_fat) %>g</td>
       </tr>
     </table>
   </div>
-  <!--作り方-->
-  <div class="master-dish__show2--recipe">
-    <p>作り方</p>
-    <p><%= @master_dish.recipe %></p>
-  </div>
-    <div class="master-dish__show2--icon-count">
-      <!--コメント-->
-      <p>コメント件数：<%= @master_dish.post_comments.count %></p>
-      <!--いいね-->
-       <% if @master_dish.favorited_by?(current_customer) %>
-        <p>
-          <%= link_to master_dish_favorites_path(@master_dish), method: :delete do %>
-            ♥<%= @master_dish.favorites.count %>
-          <% end %>
-          いいね
-        </p>
-        <% else %>
-        <p>
-          <%= link_to master_dish_favorites_path(@master_dish), method: :post do %>
-            ♡<%= @master_dish.favorites.count %>
-          <% end %>
-          いいね
-        </p>
-      <% end %>
-    </div>
-
-  <div class="master-dish__show2--comments">
-    <% @master_dish.post_comments.each do |post_comment| %>
-      <div class="show2__comments">
-        <%= post_comment.customer.name %>
-        <%= post_comment.created_at.strftime('%Y/%m/%d') %>
-        <div class="show2__comments--detail">
-          <%= post_comment.comment %>
-        </div>
-      <% if post_comment.customer == current_customer %>
-          <%= link_to "削除", master_dish_post_comment_path(post_comment.master_dish, post_comment), method: :delete %>
-        </div>
-      <% end %>
-    <% end %>
-
-  </div>
-  <div class="master-dish__show2--new-comment">
-    <%= form_with(model:[@master_dish, @post_comment], local: true) do |f| %>
-      <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %></br>
-      <%= f.submit "送信する" %>
-
-    <% end %>
-  </div>
-
-
-
   <div>
-    <%= link_to master_dishes_path do %>
+    <%= link_to master_menus_path do %>
     戻る
     <% end %>
   </div>

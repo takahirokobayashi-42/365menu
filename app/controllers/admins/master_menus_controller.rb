@@ -1,17 +1,18 @@
 class Admins::MasterMenusController < ApplicationController
   def index
     @master_menus = MasterMenu.all
+    @master_menus = MasterMenu.page(params[:page]).per(6)
   end
 
   def new
-    @master_menu= MasterMenu.new
+    @master_menu = MasterMenu.new
     @master_menu_recipe = @master_menu.master_menu_recipes.build
   end
 
   def create
     @master_menu= MasterMenu.new(master_menu_params)
 
-    if @master_menu.save!
+    if @master_menu.save
       redirect_to admins_master_menus_path
     else
       @master_menus = MasterMenu.all
@@ -21,11 +22,7 @@ class Admins::MasterMenusController < ApplicationController
 
   def show
     @master_menu=MasterMenu.find(params[:id])
-    @master_menu_recipes=MasterMenuRecipe.all
-    @total_calory = 0
-    @total_fat = 0
-    @total_carbohydrate = 0
-    @total_protein = 0
+    @master_menu_recipes=MasterMenuRecipe.where(master_menu_id: @master_menu.id)
   end
 
   def edit
