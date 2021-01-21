@@ -2,7 +2,7 @@
   <div class="wrapper site-header__wrapper">
     <p class="site-header__wrapper-title">
     <% if admin_signed_in? %>
-      <% link_to admins_homes_top_path do%>
+      <%= link_to admins_home_path do%>
       <%= image_tag 'logo.png', :size => '140x100' %>
       <% end %>
     <% else %>
@@ -15,17 +15,17 @@
 
     <% if admin_signed_in? %>
       <!--管理者がログインしているとき-->
-      <ul>
-        <li>
+      <ul class="nav__wrapper">
+        <li class="nav__item">
           <%= link_to "メニュー一覧", admins_master_menus_path, class: "btn btn-malformation btn-outline-secondary btn-sm w-auto" %>
         </li>
-        <li>
+        <li class="nav__item">
           <%= link_to "レシピ一覧", admins_master_dishes_path, class: "btn btn-malformation btn-outline-secondary btn-sm w-auto" %>
         </li>
-        <li>
+        <li class="nav__item">
           <%= link_to "カスターマー画面", root_path, class: "btn btn-malformation btn-outline-secondary btn-sm w-auto" %>
         </li>
-        <li>
+        <li class="nav__item">
           <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-malformation btn-outline-secondary btn-sm w-auto" %>
         </li>
       </ul>
@@ -53,18 +53,20 @@
 
       <% else %>
       <!--ログインしていないとき-->
-      <li>
-        <%= link_to "メニュー一覧", master_menus_path, class: "btn btn-malformation btn-outline-secondary btn-sm w-auto" %>
-      </li>
-      <li>
-        <%= link_to "レシピ一覧", master_dishes_path, class: "btn btn-malformation btn-outline-secondary btn-sm w-auto" %>
-      </li>
-      <li>
-        <%= link_to "新規登録", new_customer_registration_path, class: "btn btn-malformation btn-outline-secondary btn-sm w-auto" %>
-      </li>
-      <li>
-        <%= link_to "ログイン", new_customer_session_path, class: "btn btn-malformation btn-outline-secondary btn-sm w-auto" %>
-      </li>
+      <ul class="nav__wrapper">
+        <li class="nav__item">
+          <%= link_to "メニュー一覧", master_menus_path, class: "btn btn-malformation btn-outline-secondary btn-sm w-auto" %>
+        </li>
+        <li class="nav__item">
+          <%= link_to "レシピ一覧", master_dishes_path, class: "btn btn-malformation btn-outline-secondary btn-sm w-auto" %>
+        </li>
+        <li class="nav__item">
+          <%= link_to "新規登録", new_customer_registration_path, class: "btn btn-malformation btn-outline-secondary btn-sm w-auto" %>
+        </li>
+        <li class="nav__item">
+          <%= link_to "ログイン", new_customer_session_path, class: "btn btn-malformation btn-outline-secondary btn-sm w-auto" %>
+        </li>
+      </ul>
       <% end %>
     </ul>
   </nav>
