@@ -12,5 +12,9 @@ class MasterDish < ApplicationRecord
   end
 
   attachment :image
+  
+  def self.search(search, word)
+    @master_dish = MasterDish.where("name LIKE?","%#{word}%") if name.present?
+  end
 
 end

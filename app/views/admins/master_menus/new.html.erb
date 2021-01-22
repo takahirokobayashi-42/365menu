@@ -1,7 +1,9 @@
 <%= form_with model: @master_menu, url: master_menus_path, method: :post, local:true do |f| %>
   <div class="mastermenu-new">
    <div class="left-box">
-
+      <div class="admins-alert">
+        <%= render "layouts/error.msg", resource: @master_menu %>
+      </div>
       <div class="left-box__menu-name">
         レシピ名
         <%= f.text_field :name, size: 40 %>

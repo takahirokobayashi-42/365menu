@@ -35,10 +35,12 @@
         padding: 20px 10px 20px 0;
         text-align: center;
       }
-
-      tr:first-child{
-        border-bottom: 1px solid;
+      // firstchildがlastchildから2番目の時　＝　trが2つあるときに1番目のtrにborder-bottomを付ける
+      tr:first-child:nth-last-child(2),
+      tr:first-child:nth-last-child(2) ~ tr:first-child{
+         border-bottom: 1px solid;
       }
+
     }
   }
   &__master-dish{

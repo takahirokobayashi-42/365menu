@@ -1,5 +1,8 @@
 <%= form_with model: @master_dish, url: master_dish_path, method: :put, local:true do |f| %>
   <div class="masterdish-new">
+    <div class="admins-alert">
+          <%= render "layouts/error.msg", resource: @master_dish %>
+    </div>
    <div class="left-box">
       <div class="left-box__dish-name">
         レシピ名
@@ -26,14 +29,13 @@
           </tr>
         </thead>
         <tbody>
-
           <tr>
-             <%= f.fields_for :dish_foodstuffs do |t| %>
             <td>
               <!-- 食材入力フィールド -->
+              <%= f.fields_for :dish_foodstuffs do |t| %>
               <%= render "master_dishes/dish_foodstuff_fields", f: t %>
+              <% end %>
             </td>
-             <% end %>
           </tr>
           <tr>
             <td id="test">

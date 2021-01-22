@@ -5,4 +5,8 @@ class MasterMenu < ApplicationRecord
   accepts_nested_attributes_for :master_menu_recipes
 
   attachment :image
+
+  def self.search(search, word)
+    @master_menu = MasterMenu.where("name LIKE?","%#{word}%") if name.present?
+  end
 end

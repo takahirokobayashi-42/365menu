@@ -16,7 +16,7 @@ class MasterMenusController < ApplicationController
       redirect_to admins_master_menus_path
     else
       @master_menus = MasterMenu.all
-      redirect_to root_path
+      render "new"
     end
   end
 
@@ -34,7 +34,8 @@ class MasterMenusController < ApplicationController
     if @master_menu.update(master_menu_params)
       redirect_to admins_master_menu_path(@master_menu.id)
     else
-      render :edit
+      @master_menu= MasterMenu.find(params[:id])
+      render "edit"
     end
   end
 

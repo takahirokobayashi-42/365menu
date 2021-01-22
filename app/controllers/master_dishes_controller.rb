@@ -11,19 +11,19 @@ class MasterDishesController < ApplicationController
 
   def create
     @master_dish = MasterDish.new(master_dish_params)
- 
+
     @master_dish.dish_foodstuffs.each do |dish_foodstuff|
     @master_dish.total_protein += ((dish_foodstuff.foodstuff.protein*(dish_foodstuff.amount/100))/@master_dish.count).round
     @master_dish.total_carbohydrate += ((dish_foodstuff.foodstuff.carbohydrate*(dish_foodstuff.amount/100))/@master_dish.count).round
     @master_dish.total_fat += ((dish_foodstuff.foodstuff.fat*(dish_foodstuff.amount/100))/@master_dish.count).round
     @master_dish.total_calory += (dish_foodstuff.foodstuff.calory*(dish_foodstuff.amount/100)/@master_dish.count).round
     end
-    
+
     if @master_dish.save
       redirect_to master_dishes_path
     else
       @master_dishes = MasterDish.all
-      redirect_to root_path
+      render "new"
     end
   end
 
@@ -46,7 +46,8 @@ class MasterDishesController < ApplicationController
     if @master_dish.update(master_dish_params)
       redirect_to master_dish_path(@master_dish.id)
     else
-      render :edit
+      @master_dish = MasterDish.find(params[:id])
+      render "edit"
     end
   end
 

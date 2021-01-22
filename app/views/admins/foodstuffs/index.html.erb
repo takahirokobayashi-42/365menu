@@ -13,6 +13,9 @@
  <!-- end-->
 
 <div class="foodstuff">
+  <div class="admins-alert">
+    <%= render "layouts/error_msg", resource: @foodstuff %>
+  </div>
   <div class="foodstuff__index">
      <div>
       <strong class="admins-title-name" >食材一覧・追加</strong>

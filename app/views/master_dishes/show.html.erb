@@ -9,7 +9,7 @@
     <% end %>
   </p>
   <p class="show__head--edit">
-    <% if @master_dish.customer_id == current_customer.id %>
+    <% if @master_dish.is_master == true %>
     <%= link_to "編集", edit_master_dish_path(@master_dish) %>
     <% end %>
   </p>
@@ -58,21 +58,10 @@
       <!--コメント-->
       <p>コメント件数：<%= @master_dish.post_comments.count %></p>
       <!--いいね-->
-       <% if @master_dish.favorited_by?(current_customer) %>
-        <p>
-          <%= link_to master_dish_favorites_path(@master_dish), method: :delete do %>
-            ♥<%= @master_dish.favorites.count %>
-          <% end %>
-          いいね
-        </p>
-        <% else %>
-        <p>
-          <%= link_to master_dish_favorites_path(@master_dish), method: :post do %>
-            ♡<%= @master_dish.favorites.count %>
-          <% end %>
-          いいね
-        </p>
-      <% end %>
+      <p>
+        ♡<%= @master_dish.favorites.count %>
+        いいね
+      </p>
     </div>
 
   <div class="master-dish__show2--comments">
