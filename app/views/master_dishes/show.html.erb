@@ -10,7 +10,11 @@
   </p>
   <p class="show__head--edit">
     <% if @master_dish.is_master == true %>
-    <%= link_to "編集", edit_master_dish_path(@master_dish) %>
+      <% if current_admin.present? %>
+        <%= link_to "編集", edit_master_dish_path(@master_dish) %>
+      <% end %>
+    <% elsif @master_dish.customer_id == current_customer %>
+      <%= link_to "編集", edit_master_dish_path(@master_dish) %>
     <% end %>
   </p>
   <%= attachment_image_tag @master_dish, :image, :fill, 400, 400, format: 'jpeg' %></br>

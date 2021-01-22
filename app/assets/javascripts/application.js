@@ -19,7 +19,8 @@
 //= require_tree .
 //= require cocoon
 
-$(function() {
+// ターボリンクスを無効化
+$(document).on('turbolinks:load', function() {
   function readURL(input) {
     if(input.files && input.files[0]){
       var reader = new FileReader();

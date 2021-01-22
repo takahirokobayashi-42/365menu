@@ -44,9 +44,14 @@ class Admins::MasterDishesController < ApplicationController
   def update
     @master_dish = MasterDish.find(params[:id])
     if @master_dish.update(master_dish_params)
-      redirect_to master_dish_path(@master_dish.id)
+      if admin_signed_in?
+        redirect_to admins_master_dish_path(@master_dish.id )
+      else
+        redirect_to master_dish_path(@master_dish.id)
+      end
     else
-      render :edit
+      @master_dish = MasterDish.find(params[:id])
+      render "edit"
     end
   end
 
