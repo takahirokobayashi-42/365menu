@@ -1,0 +1,42 @@
+// Place all the styles related to the master_menus controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.mastermenu-new {
+  @media(min-width: 950px){
+    display: flex;
+  }
+
+.left-box{
+  &__menu-name{
+    margin-bottom: 20px;
+    }
+  &__menu-genre{
+    margin-top: 20px;
+  }
+  @media(min-width: 950px){
+    width: 50%;
+    margin-left: 50px;
+    &__dish-name{
+      margin-bottom: 20px;
+      }
+    }
+  }
+
+.right-box{
+  @media(min-width: 950px){
+  width: 50%;
+  }
+  &__genre{
+   margin-bottom: 30px;
+  }
+}
+}
+
+textarea{
+  height: 7em;
+  width: 80%;
+  @media(min-width: 950px){
+    height: 7em;
+    width: 50%;
+  }
+}

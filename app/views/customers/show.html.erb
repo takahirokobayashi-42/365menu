@@ -1,0 +1,64 @@
+<div class="customer-show">
+
+    <div class="customer-show__head">
+      <% if @customer == current_customer %>
+      <p><%= link_to "レシピを投稿する", new_master_dish_path %></p>
+      <p><%= link_to "メニューを投稿する", new_master_menu_path %></p>
+      <% end %>
+    </div>
+    <div class="customer-show__introduction">
+      <h5 class="customer-show__introduction--title"><strong>登録情報</strong></h5>
+      <% if @customer == current_customer %>
+      <%= link_to '編集する', edit_customer_path, class: "btn customer-show__introduction--btn" %>
+      <%= link_to 'パスワードを変更する', new_customer_password_path(current_customer), class: "btn customer-show__introduction--btn" %>
+      <% end %>
+      <table class="introduction__table">
+        <tr>
+          <th>名前</th>
+          <td><%= current_customer.name %></td>
+        </tr>
+        <% if @customer == current_customer %>
+        <tr>
+          <th>メールアドレス</th>
+          <td><%= current_customer.email %></td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+    <div class="customer-show__master-dish">
+      <h4>投稿したレシピ</h4>
+      <div class="master-dish__wrap">
+        <!--レシピからwhereでcustomer_idを指定して表示させている-->
+        <% @master_dishes.where(customer_id: @customer).each do |master_dish| %>
+        <div class="master-dish__wrap--element">
+          <%= link_to master_dish_path(master_dish) do %>
+            <p><%= master_dish.name %></p>
+          <% end %>
+          <p>作成日：<%= master_dish.created_at.strftime('%m/%d') %></p>
+          </p><%= attachment_image_tag master_dish, :image, :fill, 170, 180, format: 'jpeg' %></p>
+        </div>
+        <% end %>
+        <%= paginate(@master_dishes) %>
+
+      </div>
+
+    </div>
+    <div class="customer-show__master-menu">
+      <h4>投稿したメニュー</h4>
+
+       <div class="master-menu__wrap">
+        <% @master_menus.where(customer_id: @customer).each do |master_menu| %>
+        <div class="master-menu__wrap--element">
+          <%= link_to master_menu_path(master_menu) do %>
+            <p><%= master_menu.name %></p>
+          <% end %>
+          <p>作成日：<%= master_menu.created_at.strftime('%m/%d') %></p>
+          </p><%= attachment_image_tag master_menu, :image, :fill, 100, 100, format: 'jpeg' %></p>
+        </div>
+        <% end %>
+        <%= paginate(@master_menus) %>
+
+      </div>
+
+    </div>
+

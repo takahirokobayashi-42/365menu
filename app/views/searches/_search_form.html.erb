@@ -1,0 +1,11 @@
+<% if customer_signed_in? || admin_signed_in? %>
+  <div style="text-align:center;">
+    <span>
+   <%= form_tag(searches_search_path, method: :get) do %>
+　　<%= select_tag 'range' ,options_for_select([['会員', '1'], ['レシピ', '2'], ['メニュー', '3']]) %>
+   　　<%= text_field_tag (:word) %>
+   　　<%= submit_tag "検索" %>
+   　</span>
+  </div>
+   <% end %>
+<% end %>

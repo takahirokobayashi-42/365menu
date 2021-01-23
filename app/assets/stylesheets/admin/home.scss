@@ -1,0 +1,11 @@
+// Place all the styles related to the categories controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.admin-home{
+  &__element{
+    text-align: center;
+    h1:first-child{
+      margin-top: 50px;
+    }
+  }
+}

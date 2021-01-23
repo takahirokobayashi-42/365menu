@@ -1,0 +1,199 @@
+// Place all the styles related to the master_dishes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+// new
+.masterdish-new {
+  @media(min-width: 950px){
+    display: flex;
+  }
+
+.left-box{
+  &__dish-name{
+    margin-bottom: 20px;
+    }
+  @media(min-width: 950px){
+    width: 50%;
+    margin-left: 50px;
+    &__dish-name{
+      margin-bottom: 20px;
+      }
+    }
+  }
+
+.right-box{
+  @media(min-width: 950px){
+  width: 50%;
+  }
+}
+}
+
+textarea{
+  height: 7em;
+  width: 80%;
+  @media(min-width: 950px){
+    height: 7em;
+    width: 50%;
+  }
+}
+
+.master-dish__recipe{
+  margin-top: 30px;
+  @media(min-width: 950px){
+  margin-left: 50px;
+  margin-top: 30px;
+  }
+}
+
+// index
+.master-dish-index{
+  width: 100%;
+  &__info{
+    margin: auto;
+    width: 70%;
+    background-color: white;
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+  .pagination {
+  justify-content: center;
+}
+
+}
+
+.master-dish-index__info{
+   display: flex;
+  flex-wrap: wrap;
+}
+
+.info__table{
+  margin: auto;
+  margin-top: 100px;
+  width: 400px;
+
+}
+
+.info__table--element{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  border: solid ;
+  border-radius: 100px;
+  background-color: #F9FBC5;
+  .test{
+    test-align:center;
+    color: green;
+  }
+}
+
+// show
+.master-dish__show{
+  @media(min-width: 1000px){
+  display: flex;
+  }
+  padding-top: 25px;
+  .show__head{
+    width: 450px;
+    margin-left: 50px;
+    &--title{
+      font-size: 30px;
+    }
+    p{
+      display: inline-block;
+    }
+    &--post{
+      text-align: right
+    }
+  }
+  .show__foodstuff{
+    width: 450px;
+    text-align: center;
+    @media(min-width: 1000px){
+    width: 500px;
+    text-align: left;
+    }
+    @media(max-width: 1000px){
+      table{
+        margin: auto;
+        margin-bottom: 50px;
+      }
+    }
+
+    p{
+      font-size: 25px;
+    }
+    table{
+
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 50%;
+    td{
+      border-bottom: solid 1px black;
+      }
+
+    }
+    table td{
+    text-align: center;
+    width: 25%;
+    padding: 15px 0;
+    }
+  }
+}
+.master-dish__show2{
+  &--nutrients{
+  width: 450px;
+  text-align: center;
+  p{
+    margin-top: 30px;
+  }
+
+  table{
+    margin: auto;
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 50%;
+    td{
+      border-bottom: solid 1px black;
+      }
+    }
+    table td{
+    text-align: center;
+    width: 25%;
+    padding: 15px 0;
+    }
+  }
+  &--recipe{
+    margin-left: 50px;
+    max-width: 600px;
+    min-height: 300px;
+    background-color: white;
+    margin-top: 20px;
+    p:first-child{
+      margin-left: 20px;
+    }
+  }
+  &--icon-count{
+    margin-left: 50px;
+    margin-top: 20px;
+  }
+  &--comments{
+    margin-left: 50px;
+    @media(min-width: 600px){
+    margin-left: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    }
+  }
+  .show2__comments{
+    &--detail{
+      width: 200px;
+      min-height: 100px;
+      background-color: white;
+      margin-right: 20px;
+    }
+  }
+  &--new-comment{
+    margin-left: 50px;
+  }
+}

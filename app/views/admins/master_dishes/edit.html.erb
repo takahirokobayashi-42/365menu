@@ -1,0 +1,57 @@
+<%= form_with model: @master_dish, url: admins_master_dish_path, method: :put, local:true do |f| %>
+  <div class="masterdish-new">
+    <div class="admins-alert">
+        <%= render "layouts/error.msg", resource: @master_dish %>
+    </div>
+    <div class="left-box">
+      <div class="left-box__dish-name">
+        レシピ名
+        <%= f.text_field :name, size: 30 %>
+      </div>
+      <div class"left-boxdish__image">
+        <%= attachment_image_tag @master_dish, :image, fallback: "no-image.png", id: "img_prev", :size=>"400x300" %></br>
+        <%= f.attachment_field :image, class: 'img_field' %>
+      </div>
+    </div>
+  <div class="right-box">
+    <div class="right-box__genre">
+      ジャンル名<%= f.collection_select :genre_id, Genre.where(is_active: 1), :id, :name, include_blank: "選択して下さい", :size=>"40" %>
+    </div>
+      <table clas="right-box__table">
+        <thead>
+          <tr>
+            <th>
+            食材
+            <!--追加ボタン　association_insertion_nodeでどこに追加したフォームを表示させるか記述している-->
+            <%= link_to_add_association "追加", f, :dish_foodstuffs,  data: {association_insertion_node: '#test',association_insertion_method: 'append' } %>
+            </th>
+            <th><%=f.text_field :count, :size=>"5" %>人分</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <tr>
+            <td>
+              <!-- 食材入力フィールド -->
+              <%= f.fields_for :dish_foodstuffs do |t| %>
+              <%= render "master_dishes/dish_foodstuff_fields", f: t %>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td id="test">
+             <!-- 食材追加ボタン -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<div class="master-dish__recipe">
+  作り方</br>
+  <%= f.text_area :recipe %></br>
+  <%= f.submit "編集する" %>
+</div>
+  <%= f.hidden_field :is_master, :value => true %>
+<% end %>
+<script src="app.js"></script>

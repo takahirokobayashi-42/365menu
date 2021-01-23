@@ -1,0 +1,30 @@
+<div class="customer-edit">
+    <p class="customer-edit__head--title"><h5>登録情報編集</h5></p>
+  <div class="error-message offset-lg-2">
+    <%#= render "layouts/error_msg", resource: current_customer %>
+  </div>
+  <div class="customer-edit__element">
+    <%= form_with model:current_customer, url: customer_path, method: :patch, local:true do |f| %>
+      <div class="element__form-group ">
+        <dl>
+          <dt>
+            <%= f.label :名前,　class: "element__form-group--label" %>
+          </dt>
+          <dd>
+            <%= f.text_field :name, class: "element__form-group--field" %>
+          </dd>
+          <dt>
+            <%= f.label :email, 'メールアドレス', class: "element__form-group--label"%>
+          </dt>
+          <dd>
+            <%= f.email_field :email, class:"element__form-group--filed" %>
+          </dd>
+        </dl>
+      </div>
+      <div class="element__form-btn">
+          <%= f.submit '編集内容を保存する', class: "btn" %>
+          <%= link_to '退会する', customers_unsubscribe_path, class: "btn" %>
+       </div>
+      <% end %>
+    </div>
+  </div>

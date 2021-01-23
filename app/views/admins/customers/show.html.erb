@@ -1,0 +1,32 @@
+<div class="top">
+<br>
+<div class="container">
+<strong class="admins-title-name"><%= @customer.name %>さんの会員情報</strong>
+<br>
+<div class="row">
+    <div class="col-xl-12">
+        <div class="admins-item-body">
+        <table class="table admins-custommer-show-table">
+            <tr><th class="text-center">顧客ID</th>
+                <td class="text-center"><%= @customer.id%>
+                        <% if @customer.is_unsubscribed == true %>
+                        <p class="admins-customer-text">退会済み</p>
+                        <% elsif @customer.is_unsubscribed == false %>
+                        <p class="admins-customer-text">有効会員</p>
+                        <% end %>
+                    </td>
+            </tr>
+            <tr><th class="text-center">氏名</th><td class="text-center"><%= @customer.name %></td></tr>
+            <tr><th class="text-center">メールアドレス</th><td class="text-center"><%= @customer.email %></td></tr>
+        </table>
+        </div>
+
+        <br>
+        <div class="text-center">
+            <%= link_to "編集する", edit_admins_customer_path(@customer), class: "btn btn-1 btn-sm w-auto" %>
+
+        </div>
+    </div>
+</div>
+</div>
+</div>

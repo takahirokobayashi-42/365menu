@@ -1,0 +1,97 @@
+<div class="master-dish__show">
+  <div class="show__head">
+  <p class="show__head--title"><%= @master_dish.name %></p>
+  <p class="show__head--post">投稿者
+    <% if @master_dish.is_master == true %>
+    365menu
+    <% else %>
+    <%= Customer.find(@master_dish.customer_id).name %>
+    <% end %>
+  </p>
+  <p class="show__head--edit">
+    <% if @master_dish.is_master == true %>
+      <% if current_admin.present? %>
+        <%= link_to "編集", edit_master_dish_path(@master_dish) %>
+      <% end %>
+    <% elsif @master_dish.customer_id == current_customer %>
+      <%= link_to "編集", edit_master_dish_path(@master_dish) %>
+    <% end %>
+  </p>
+  <%= attachment_image_tag @master_dish, :image, :fill, 400, 400, format: 'jpeg' %></br>
+  </div>
+
+  <div class="show__foodstuff">
+    <p>材料(<%= @master_dish.count %>人分)</p>
+  <table>
+  <% @dish_foodstuffs.each do |dish_foodstuff| %>
+    <% if dish_foodstuff.master_dish_id == @master_dish.id %>
+    <tr>
+      <td><%= dish_foodstuff.foodstuff.name %></td>
+      <td><%= dish_foodstuff.amount %>g</td>
+      </tr>
+    <% end %>
+  <% end %>
+  </table>
+  </div>
+  </div>
+  <div class="master-dish__show2">
+  <div class="master-dish__show2--nutrients">
+    <p>1人前当たり</p>
+    <table>
+      <!--上記の栄養素を表示-->
+      <tr>
+        <td>カロリー:<%= @master_dish.total_calory %>kcal</td>
+      </tr>
+      <tr>
+        <td>タンパク質:<%= @master_dish.total_protein %>g</td>
+      </tr>
+      <tr>
+        <td>炭水化物:<%= @master_dish.total_carbohydrate %>g</td>
+      </tr>
+      <tr>
+        <td>脂質:<%= @master_dish.total_fat %>g</td>
+      </tr>
+    </table>
+  </div>
+  <!--作り方-->
+  <div class="master-dish__show2--recipe">
+    <p>作り方</p>
+    <p><%= @master_dish.recipe %></p>
+  </div>
+    <div class="master-dish__show2--icon-count">
+      <!--コメント-->
+      <p>コメント件数：<%= @master_dish.post_comments.count %></p>
+      <!--いいね-->
+      <p>
+        ♡<%= @master_dish.favorites.count %>
+        いいね
+      </p>
+    </div>
+
+  <div class="master-dish__show2--comments">
+    <% @master_dish.post_comments.each do |post_comment| %>
+      <div class="show2__comments">
+        <%= post_comment.customer.name %>
+        <%= post_comment.created_at.strftime('%Y/%m/%d') %>
+        <div class="show2__comments--detail">
+          <%= post_comment.comment %>
+        </div>
+      <% if post_comment.customer == current_customer %>
+          <%= link_to "削除", master_dish_post_comment_path(post_comment.master_dish, post_comment), method: :delete %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="master-dish__show2--new-comment">
+    <%= form_with(model:[@master_dish, @post_comment], local: true) do |f| %>
+      <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %></br>
+      <%= f.submit "送信する" %>
+
+    <% end %>
+  </div>
+  <div>
+    <%= link_to master_dishes_path do %>
+    戻る
+    <% end %>
+  </div>
+</div>

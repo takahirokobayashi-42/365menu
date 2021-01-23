@@ -1,2 +1,0 @@
-class PostDish < ApplicationRecord
-end

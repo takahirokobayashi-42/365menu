@@ -1,0 +1,35 @@
+<div class="foodstuff-show">
+  <h1>
+  <%= @foodstuff.name %>
+  </h1>
+  <table>
+    <tr>
+      <td>カテゴリー</td>
+      <td><%= @foodstuff.category.name %></td>
+    </tr>
+    <tr>
+      <td>カロリー</td>
+      <td><%= @foodstuff.calory %>kcal</td>
+    </tr>
+    <tr>
+      <td>タンパク質</td>
+      <td><%= @foodstuff.protein %>g</td>
+    </tr>
+     <tr>
+      <td>炭水化物</td>
+      <td><%= @foodstuff.carbohydrate %>g</td>
+    </tr>
+     <tr>
+      <td>脂質</td>
+      <td><%= @foodstuff.fat %>g</td>
+    </tr>
+  </table>
+  <div class="foodstuff-show__subtab">
+    <%= link_to edit_admins_foodstuff_path(@foodstuff.id) do %>
+    編集
+    <% end %>
+    <%= link_to admins_foodstuffs_path do %>
+    戻る
+    <% end %>
+  </div>
+</div>

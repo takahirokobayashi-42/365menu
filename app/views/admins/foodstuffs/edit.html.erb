@@ -1,0 +1,28 @@
+ <table class="foodstuff-edit">
+   <%= form_with model: @foodstuff, url: admins_foodstuff_path(@foodstuff), method: :patch, local:true do |f| %>
+           <tr>
+            <th class=""><%= f.label "食材名" %></th>
+            <td class=""><%= f.text_field :name, size: 40 %></td>
+          </tr>
+          <tr>
+            <th class=""><%= f.label "カロリー" %></th>
+            <td class=""><%= f.text_field :calory, size: "40x10" %>kcal</td>
+          </tr>
+          <tr>
+            <th class=""><%= f.label "カテゴリー" %></th>
+            <td class=""><%= f.collection_select :category_id, Category.where(is_active: 1), :id, :name, include_blank: "選択して下さい", size: 40 %></td>
+          </tr>
+          <tr>
+            <th class=""><%= f.label "タンパク質" %></th>
+            <td class=""><%= f.text_field :protein, size: 40 %>g
+          </tr>
+          <tr>
+            <th class=""><%= f.label "脂質" %></th>
+            <td class=""><%= f.text_field :fat, size: 40 %>g</td>
+          </tr>
+          <%= f.submit %>
+          <% end %>
+        </table>
+        <%= link_to admins_foodstuff_path(@foodstuff) do %>
+    戻る
+    <% end %>

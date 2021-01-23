@@ -1,0 +1,54 @@
+<%= form_with model: @master_menu, url: master_menus_path, method: :post, local:true do |f| %>
+<div class="mastermenu-new">
+ <div class="left-box">
+   <div class="left-box__menu-name">
+      メニュー名
+      <%= f.text_field :name, size: 40 %>
+    </div>
+    <div class="left-box__menu-image">
+      <%= attachment_image_tag @master_menu, :image, fallback: "no-image.png", id: "img_prev", size:'350x250' %></br>
+      <%= f.attachment_field :image, class: 'img_field' %>
+    </div>
+    <div class="left-box__menu-genre">
+      <%= f.submit "登録する" %>
+    </div>
+  </div>
+  <div class="right-box">
+    <div class="right-box__genre">
+      ジャンル名<%= f.collection_select :menu_genre_id, MenuGenre.where(is_active: 1), :id, :name, include_blank: "選択して下さい", size: 40 %>
+    </div>
+      <table id="table">
+        <thead>
+          <tr>
+            <th>
+              メニュー
+              <%= link_to_add_association "追加", f, :master_menu_recipes, data: {association_insertion_node: '#test',association_insertion_method: 'append' }  %>
+            </th>
+            <th><%=f.text_field :count, :size=>"5" %>人分</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <!-- 食材入力フィールド -->
+              <%= f.fields_for :master_menu_recipes do |t| %>
+              <%= render "admins/master_menus/master_menu_recipe_fields", f: t %>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td id="test">
+             <!-- 食材追加ボタン -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<div class>
+
+</div>
+<%= f.hidden_field :is_master, :value => false %>
+<%= f.hidden_field :customer_id, :value => current_customer.id %>
+<% end %>
+<script src="app.js"></script>
