@@ -1,7 +1,7 @@
 <%= form_with model: @master_menu, url: master_menus_path, method: :put, local:true do |f| %>
 <div class="mastermenu-new">
   <div class="admins-alert">
-        <%= render "layouts/error.msg", resource: @master_dish %>
+        <%= render "layouts/error_msg", resource: @master_dish %>
   </div>
   <div class="left-box">
     <div class="left-box__menu-name">
