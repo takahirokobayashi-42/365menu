@@ -1,17 +1,3 @@
-<!--foodstuff schema-->
-
- <!--create_table "foodstuffs", force: :cascade do |t|-->
- <!--   t.string "category_id"-->
- <!--   t.string "name"-->
- <!--   t.string "image_id"-->
- <!--   t.integer "calory"-->
- <!--   t.integer "protein"-->
- <!--   t.integer "carbohydrate"-->
- <!--   t.integer "fat"-->
- <!--   t.datetime "created_at", null: false-->
- <!--   t.datetime "updated_at", null: false-->
- <!-- end-->
-
 <div class="foodstuff">
   <div class="admins-alert">
     <%= render "layouts/error_msg", resource: @foodstuff %>
@@ -36,10 +22,10 @@
           <%= f.text_field :fat %>g
           カテゴリーID
           <%= f.collection_select :category_id, Category.where(is_active: 1), :id, :name, include_blank: "選択して下さい", size: 40 %></td>
-          <%= f.submit %>
+          <%= f.submit "登録する" %>
         </div>
       <% end %>
-    <table>
+    <table class="foodstuff-index__table">
       <thead>
         <tr>
           <th>ID</th>
@@ -48,7 +34,8 @@
         </tr>
       </thead>
       <tbody>
-        <% @foodstuffs.each do |foodstuff| %>
+        <!--n+1問題を解消するためeager_loadを使用-->
+        <% @foodstuffs.eager_load(:category).all.each do |foodstuff| %>
         <tr>
           <td><%= foodstuff.id %></td>
           <td>
@@ -62,5 +49,6 @@
         <% end %>
       </tbody>
     </table>
+    </div>
   </div>
 </div>
