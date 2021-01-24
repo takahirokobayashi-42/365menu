@@ -9,3 +9,21 @@ Admin.find_or_create_by(id: 1) do |admin|
   admin.email = 'admin@example.com'
   admin.password = 'password'
 end
+
+require "csv"
+CSV.foreach('db/category.csv', encoding: 'Shift_JIS:UTF-8', headers: true) do |row|
+  Category.create(
+    name: row['name']
+  )
+end
+
+CSV.foreach('db/foodstuff.csv', headers: true) do |row|
+  Foodstuff.create(
+    category_id: row['category_id'],
+    name: row['name'],
+    calory: row['calory'],
+    protein: row['protein'],
+    carbohydrate: row['carbohydrate'],
+    fat: row['fat']
+  )
+end
