@@ -11,7 +11,11 @@ Rails.application.routes.draw do
   namespace :admins do
     resources :dishes
     resources :master_menus
-    resources :master_dishes
+    resources :master_dishes do
+      collection do
+        get "auto_complete"
+      end
+    end
     resources :genres, except: [:show]
     resources :categories
     resources :menu_genres

@@ -16,8 +16,10 @@
   <div class="right-box">
     <div class="right-box__genre">
       ジャンル名<%= f.collection_select :genre_id, Genre.where(is_active: 1), :id, :name, include_blank: "選択して下さい", :size=>"40" %>
+      <%= f.text_field :foodstuff_id, class: :suggest %>
     </div>
-      <table clas="right-box__table">
+      <div id="tasks">
+      <table class="right-box__table">
         <thead>
           <tr>
             <th>
@@ -31,10 +33,10 @@
         <tbody>
 
           <tr>
-             <%= f.fields_for :dish_foodstuffs do |t| %>
+             <%= f.fields_for :dish_foodstuffs do |task| %>
             <td>
               <!-- 食材入力フィールド -->
-              <%= render "master_dishes/dish_foodstuff_fields", f: t %>
+              <%= render "master_dishes/dish_foodstuff_fields", f: task %>
             </td>
              <% end %>
           </tr>
@@ -45,6 +47,7 @@
           </tr>
         </tbody>
       </table>
+      </div>
     </div>
   </div>
 <div class="master-dish__recipe">
@@ -52,7 +55,5 @@
   <%= f.text_area :recipe %></br>
   <%= f.submit "登録する" %>
 </div>
-  <% f.hidden_field :is_master, :value => true %>
-
+<% f.hidden_field :is_master, :value => true %>
 <% end %>
-<script src="app.js"></script>

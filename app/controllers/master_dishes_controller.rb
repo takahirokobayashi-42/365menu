@@ -7,7 +7,22 @@ class MasterDishesController < ApplicationController
   def new
     @master_dish = MasterDish.new
     @dish_foodstuff = @master_dish.dish_foodstuffs.build
+    @foodstuff = Foodstuff.new
+    foodstuffs = Foodstuff.all #データを全て取得
+    foodstuffs = foodstuffs.map(&:name) #:nameを取り出し、戻り値として配列で作成
+    render json: foodstuffs.to_json #jsonファイルとして受け渡す
+    respond_to do |format| #respondo_to=指定した形式で返すようにするメソッド
+    format.html
+    format.json
+    end
   end
+
+  def auto_complete
+  foodstuffs = Foodstuff.select(:name).where("name like '%" + params[:term] + "%'").order(:name)
+  foodstuffs = foodstuffs.map(&:name)
+  render json: suggest.to_json
+  end
+
 
   def create
     @master_dish = MasterDish.new(master_dish_params)

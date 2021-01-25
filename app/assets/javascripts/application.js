@@ -14,12 +14,13 @@
 //= require popper
 //= require bootstrap-sprockets
 //= require rails-ujs
+//= require jquery-ui
 //= require activestorage
 //= require turbolinks
 //= require_tree .
 //= require cocoon
 
-// ターボリンクスを無効化
+// ターボリンクスを無効化　画像のプレビュー機能
 $(document).on('turbolinks:load', function() {
   function readURL(input) {
     if(input.files && input.files[0]){
@@ -35,3 +36,11 @@ $(document).on('turbolinks:load', function() {
   });
 });
 
+// ハンバーガーメニュー　ターボリンクス無効化
+$(document).on('turbolinks:load', function() {
+  $('.menu-trigger').on('click', function(event) {
+    $(this).toggleClass('active');
+    $('#sp-menu').fadeToggle();
+    event.preventDefault();
+  });
+});
