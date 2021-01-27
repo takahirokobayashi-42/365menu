@@ -1,4 +1,7 @@
 class MasterDishesController < ApplicationController
+
+  before_action :authenticate_customer!, {only: [:new, :edit]}
+
   def index
     @master_dishes = MasterDish.all
     @master_dishes = MasterDish.page(params[:page]).per(6)

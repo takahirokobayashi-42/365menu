@@ -1,4 +1,7 @@
 class MasterMenusController < ApplicationController
+
+  before_action :authenticate_customer!, {only: [:new, :edit]}
+
   def index
     @master_menus = MasterMenu.all
     @master_menus = MasterMenu.page(params[:page]).per(6)
@@ -13,7 +16,7 @@ class MasterMenusController < ApplicationController
     @master_menu= MasterMenu.new(master_menu_params)
 
     if @master_menu.save
-      redirect_to admins_master_menus_path
+      redirect_to master_menus_path
     else
       @master_menus = MasterMenu.all
       render "new"
@@ -32,7 +35,7 @@ class MasterMenusController < ApplicationController
   def update
     @master_menu= MasterMenu.find(params[:id])
     if @master_menu.update(master_menu_params)
-      redirect_to admins_master_menu_path(@master_menu.id)
+      redirect_to master_menu_path(@master_menu.id)
     else
       @master_menu= MasterMenu.find(params[:id])
       render "edit"

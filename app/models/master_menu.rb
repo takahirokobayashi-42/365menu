@@ -10,5 +10,5 @@ class MasterMenu < ApplicationRecord
     @master_menu = MasterMenu.where("name LIKE?","%#{word}%") if name.present?
   end
   
-  validates :menu_genre_id, :name, :image_id, :count, presence: true 
+  validates :menu_genre_id, :name, :count, presence: true 
 end
