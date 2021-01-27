@@ -12,6 +12,8 @@
     <% end %>
     </p>
     <nav class="nav">
+    <!--599px以下でハンバーガーメニュー表示-->
+    <%= render "layouts/hamburger_menu" %>
 
     <% if admin_signed_in? %>
       <!--管理者がログインしているとき-->
@@ -29,7 +31,6 @@
           <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-malformation btn-outline-secondary btn-sm w-auto" %>
         </li>
       </ul>
-
 
       <% elsif customer_signed_in? %>
       <!--会員がログインしているとき-->

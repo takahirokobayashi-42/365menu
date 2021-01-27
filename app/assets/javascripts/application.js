@@ -10,16 +10,18 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery3
+//= require jquery
 //= require popper
 //= require bootstrap-sprockets
 //= require rails-ujs
+//= require jquery-ui
 //= require activestorage
 //= require turbolinks
 //= require_tree .
 //= require cocoon
+//= require select2
 
-// ターボリンクスを無効化
+// ターボリンクスを無効化　画像のプレビュー機能
 $(document).on('turbolinks:load', function() {
   function readURL(input) {
     if(input.files && input.files[0]){
@@ -35,3 +37,17 @@ $(document).on('turbolinks:load', function() {
   });
 });
 
+// ハンバーガーメニュー　ターボリンクス無効化
+$(document).on('turbolinks:load', function() {
+  $('.menu-trigger').on('click', function(event) {
+    $(this).toggleClass('active');
+    $('#sp-menu').fadeToggle();
+    event.preventDefault();
+  });
+});
+
+// select2を使用できるようにする
+$('.select').select2({
+  width: 200,
+  allowClear: true
+});

@@ -5,13 +5,16 @@ Rails.application.routes.draw do
   }
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'homes#top'
-  get '/about' => 'homes#about'
   get 'searches/search'
 
   namespace :admins do
     resources :dishes
     resources :master_menus
-    resources :master_dishes
+    resources :master_dishes do
+      collection do
+        get "auto_complete"
+      end
+    end
     resources :genres, except: [:show]
     resources :categories
     resources :menu_genres

@@ -64,6 +64,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'bootstrap', '~> 4.5'
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'font-awesome-sass', '~> 5.13'
 gem "refile", require: "refile/rails", github: 'manfe/refile'
 gem "refile-mini_magick"
@@ -73,3 +74,7 @@ gem 'dotenv-rails'
 group :production do
   gem 'mysql2'
 end
+gem 'devise-i18n'
+gem 'devise-i18n-views'
+gem 'rails-i18n'
+gem 'select2-rails'

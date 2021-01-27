@@ -1,4 +1,7 @@
 class Admins::MasterMenusController < ApplicationController
+  
+  
+  
   def index
     @master_menus = MasterMenu.all
     @master_menus = MasterMenu.page(params[:page]).per(6)

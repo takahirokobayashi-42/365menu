@@ -1,4 +1,7 @@
 class Admins::MenuGenresController < ApplicationController
+  
+  
+  
   def index
     @menu_genre = MenuGenre.new
     @menu_genres = MenuGenre.all
