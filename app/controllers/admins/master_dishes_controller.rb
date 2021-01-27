@@ -1,7 +1,7 @@
 class Admins::MasterDishesController < ApplicationController
-  
+
    before_action :authenticate_admin!
-  
+
   def index
     @master_dishes = MasterDish.all
     @master_dishes = MasterDish.page(params[:page]).per(6)
@@ -56,6 +56,10 @@ class Admins::MasterDishesController < ApplicationController
 
   def update
     @master_dish = MasterDish.find(params[:id])
+    @master_dish.total_calory = 0
+    @master_dish.total_carbohydrate = 0
+    @master_dish.total_fat = 0
+    @master_dish.total_protein = 0
     @master_dish.dish_foodstuffs.each do |dish_foodstuff|
       @master_dish.total_protein += ((dish_foodstuff.foodstuff.protein*(dish_foodstuff.amount/100))/@master_dish.count).round
       @master_dish.total_carbohydrate += ((dish_foodstuff.foodstuff.carbohydrate*(dish_foodstuff.amount/100))/@master_dish.count).round
