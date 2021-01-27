@@ -1,4 +1,7 @@
 class Admins::MasterDishesController < ApplicationController
+  
+  
+  
   def index
     @master_dishes = MasterDish.all
     @master_dishes = MasterDish.page(params[:page]).per(6)
@@ -13,7 +16,6 @@ class Admins::MasterDishesController < ApplicationController
   def new
     @master_dish = MasterDish.new
     @dish_foodstuff = @master_dish.dish_foodstuffs.build
-
   end
 
   def auto_complete
