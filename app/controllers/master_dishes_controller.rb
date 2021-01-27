@@ -35,7 +35,11 @@ class MasterDishesController < ApplicationController
     end
 
     if @master_dish.save
-      redirect_to master_dishes_path
+      if admin_signed_in?
+        redirect_to admins_master_dishes_path
+      else
+        redirect_to master_dishes_path
+      end
     else
       @master_dishes = MasterDish.all
       render "new"

@@ -1,5 +1,5 @@
 <div class="nested-fields">
-    <%= f.text_field :foodstuff_id, class: :suggest %>
-    <%= f.number_field :amount %>g
+    <%= f.collection_select(:foodstuff_id, Foodstuff.all, :id, :name, {}) %>
+    <%= f.number_field :amount, class: "nested-fields__field" %>g
     <%= link_to_remove_association "削除", f %>
 </div>

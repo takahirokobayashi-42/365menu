@@ -1,15 +1,13 @@
 <div class="master-dish-index">
   <%= render "searches/search_form" %>
   <div class="master-dish-index__info">
+    <%= link_to "投稿する", new_admins_master_dish_path %>
     <!--レシピ基本情報-->
-
-
     <% @master_dishes.each do |master_dish| %>
     <div class="info__table">
-    <div class="info__table--element">
-      <div class="test">
+      <div class="table__element">
+        <div class="elment__detail">
         <%= attachment_image_tag master_dish, :image, :fill, 250, 250, format: 'jpeg' %></br>
-
         <%= link_to admins_master_dish_path(master_dish.id) do %>
           <%= master_dish.name %>
         <% end %>
@@ -20,9 +18,7 @@
           by 365menu  ♡<%= master_dish.favorites.count %>
         <% end %>
         </div>
-
-
-    </div>
+      </div>
     </div>
     <% end %>
 
