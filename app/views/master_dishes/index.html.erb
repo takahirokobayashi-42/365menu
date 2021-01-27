@@ -6,8 +6,8 @@
 
     <% @master_dishes.each do |master_dish| %>
     <div class="info__table">
-    <div class="info__table--element">
-      <div class="test">
+    <div class="table__element">
+      <div class="element__detail">
         <%= attachment_image_tag master_dish, :image, :fill, 250, 250, format: 'jpeg' %></br>
 
         <%= link_to master_dish_path(master_dish.id) do %>

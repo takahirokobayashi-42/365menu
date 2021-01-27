@@ -1,7 +1,16 @@
 class Admins::MasterDishesController < ApplicationController
+  
+  
+  
   def index
     @master_dishes = MasterDish.all
     @master_dishes = MasterDish.page(params[:page]).per(6)
+    master_dishes = MasterDish.all #データを全て取得
+    master_dishes = master_dishes.map(&:name) #:nameを取り出し、戻り値として配列で作成
+    respond_to do |format| #respondo_to=指定した形式で返すようにするメソッド
+    format.html
+    format.json{ render json: master_dishes.to_json }
+    end
   end
 
   def new
@@ -9,21 +18,28 @@ class Admins::MasterDishesController < ApplicationController
     @dish_foodstuff = @master_dish.dish_foodstuffs.build
   end
 
+  def auto_complete
+    master_dishes = MasterDish.select(:name).where("name like '%" + params[:term] + "%'").order(:name)
+    logger.info '*' * 100
+    logger.info '*' * 100
+    master_dishes = master_dishes.map(&:name)
+    render json: master_dishes.to_json
+  end
+
   def create
     @master_dish = MasterDish.new(master_dish_params)
-
     @master_dish.dish_foodstuffs.each do |dish_foodstuff|
-    @master_dish.total_protein += ((dish_foodstuff.foodstuff.protein*(dish_foodstuff.amount/100))/@master_dish.count).round
-    @master_dish.total_carbohydrate += ((dish_foodstuff.foodstuff.carbohydrate*(dish_foodstuff.amount/100))/@master_dish.count).round
-    @master_dish.total_fat += ((dish_foodstuff.foodstuff.fat*(dish_foodstuff.amount/100))/@master_dish.count).round
-    @master_dish.total_calory += (dish_foodstuff.foodstuff.calory*(dish_foodstuff.amount/100)/@master_dish.count).round
+      @master_dish.total_protein += ((dish_foodstuff.foodstuff.protein*(dish_foodstuff.amount/100))/@master_dish.count).round
+      @master_dish.total_carbohydrate += ((dish_foodstuff.foodstuff.carbohydrate*(dish_foodstuff.amount/100))/@master_dish.count).round
+      @master_dish.total_fat += ((dish_foodstuff.foodstuff.fat*(dish_foodstuff.amount/100))/@master_dish.count).round
+      @master_dish.total_calory += (dish_foodstuff.foodstuff.calory*(dish_foodstuff.amount/100)/@master_dish.count).round
     end
 
     if @master_dish.save
       redirect_to master_dishes_path
     else
       @master_dishes = MasterDish.all
-      redirect_to root_path
+      render "new"
     end
   end
 
@@ -31,10 +47,7 @@ class Admins::MasterDishesController < ApplicationController
     @master_dish = MasterDish.find(params[:id])
     @post_comment = PostComment.new
     @dish_foodstuffs = DishFoodstuff.all
-    @total_calory = 0
-    @total_fat = 0
-    @total_carbohydrate = 0
-    @total_protein = 0
+
   end
 
   def edit
@@ -43,6 +56,12 @@ class Admins::MasterDishesController < ApplicationController
 
   def update
     @master_dish = MasterDish.find(params[:id])
+    @master_dish.dish_foodstuffs.each do |dish_foodstuff|
+      @master_dish.total_protein += ((dish_foodstuff.foodstuff.protein*(dish_foodstuff.amount/100))/@master_dish.count).round
+      @master_dish.total_carbohydrate += ((dish_foodstuff.foodstuff.carbohydrate*(dish_foodstuff.amount/100))/@master_dish.count).round
+      @master_dish.total_fat += ((dish_foodstuff.foodstuff.fat*(dish_foodstuff.amount/100))/@master_dish.count).round
+      @master_dish.total_calory += (dish_foodstuff.foodstuff.calory*(dish_foodstuff.amount/100)/@master_dish.count).round
+    end
     if @master_dish.update(master_dish_params)
       if admin_signed_in?
         redirect_to admins_master_dish_path(@master_dish.id )
