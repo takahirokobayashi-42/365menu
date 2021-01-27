@@ -1,7 +1,7 @@
 class Admins::FoodstuffsController < ApplicationController
-  
+
   before_action :authenticate_admin!
-  
+
   def index
     @foodstuff= Foodstuff.new
     @foodstuffs = Foodstuff.all
@@ -12,7 +12,6 @@ class Admins::FoodstuffsController < ApplicationController
     if @foodstuff.save
       redirect_to admins_foodstuffs_path
     else
-      @foodstuffs = Foodstuff.all
       render :index
     end
   end
@@ -30,6 +29,7 @@ class Admins::FoodstuffsController < ApplicationController
     if @foodstuff.update(foodstuff_params)
       redirect_to admins_foodstuff_path(@foodstuff.id)
     else
+      @foodstuff= Foodstuff.find(params[:id])
       render :edit
     end
   end
