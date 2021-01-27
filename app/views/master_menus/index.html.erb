@@ -1,9 +1,7 @@
 <div class="master-dish-index">
   <%= render "searches/search_form" %>
   <div class="master-dish-index__info">
-    <!--レシピ基本情報-->
-
-
+    <!--メニュー一覧-->
     <% @master_menus.each do |master_menu| %>
     <div class="info__table">
     <div class="info__table--element">
@@ -13,7 +11,7 @@
         <%= link_to master_menu_path(master_menu.id) do %>
           <%= master_menu.name %>
         <% end %>
-      <!--投稿レシピは投稿者の名前を表示　マスターは365menuと表示-->
+      <!--投稿メニューは投稿者の名前を表示　マスターは365menuと表示-->
         <% if master_menu.is_master == false %>
           by <%= Customer.find(master_menu.customer_id).name %>
         <% else %>

@@ -13,7 +13,7 @@
       <% if current_admin.present? %>
         <%= link_to "編集", edit_master_dish_path(@master_dish) %>
       <% end %>
-    <% elsif @master_dish.customer_id == current_customer %>
+    <% elsif @master_dish.customer_id == current_customer.id %>
       <%= link_to "編集", edit_master_dish_path(@master_dish) %>
     <% end %>
   </p>
@@ -56,16 +56,25 @@
   <!--作り方-->
   <div class="master-dish__show2--recipe">
     <p>作り方</p>
-    <p><%= @master_dish.recipe %></p>
+    <p><%= simple_format(@master_dish.recipe) %></p>
   </div>
     <div class="master-dish__show2--icon-count">
       <!--コメント-->
       <p>コメント件数：<%= @master_dish.post_comments.count %></p>
       <!--いいね-->
-      <p>
-        ♡<%= @master_dish.favorites.count %>
-        いいね
-      </p>
+      <% if @master_dish.favorited_by?(current_customer) %>
+    <p>
+      <%= link_to master_dish_favorites_path(@master_dish), method: :delete do %>
+        ♥<%= @master_dish.favorites.count %> いいね
+      <% end %>
+    </p>
+    <% else %>
+    <p>
+      <%= link_to master_dish_favorites_path(@master_dish), method: :post do %>
+        ♡<%= @master_dish.favorites.count %> いいね
+      <% end %>
+    </p>
+  <% end %>
     </div>
 
   <div class="master-dish__show2--comments">
@@ -83,10 +92,9 @@
     <% end %>
   </div>
   <div class="master-dish__show2--new-comment">
-    <%= form_with(model:[@master_dish, @post_comment], local: true) do |f| %>
+      <%= form_with(model:[@master_dish, @post_comment], local: true) do |f| %>
       <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %></br>
       <%= f.submit "送信する" %>
-
     <% end %>
   </div>
   <div>

@@ -1,7 +1,7 @@
 class Admins::MenuGenresController < ApplicationController
-  
-  
-  
+
+   before_action :authenticate_admin!
+
   def index
     @menu_genre = MenuGenre.new
     @menu_genres = MenuGenre.all

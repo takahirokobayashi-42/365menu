@@ -1,7 +1,10 @@
 <%= form_with model: @master_menu, url: master_menus_path, method: :post, local:true do |f| %>
 <div class="mastermenu-new">
  <div class="left-box">
-   <div class="left-box__menu-name">
+  <div class="admins-alert">
+      <%= render "layouts/error_msg", resource: @master_menu %>
+  </div>
+  <div class="left-box__menu-name">
       メニュー名
       <%= f.text_field :name, size: 40 %>
     </div>
@@ -51,4 +54,3 @@
 <%= f.hidden_field :is_master, :value => false %>
 <%= f.hidden_field :customer_id, :value => current_customer.id %>
 <% end %>
-<script src="app.js"></script>

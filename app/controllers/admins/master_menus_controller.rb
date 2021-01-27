@@ -1,7 +1,7 @@
 class Admins::MasterMenusController < ApplicationController
-  
-  
-  
+
+   before_action :authenticate_admin!
+
   def index
     @master_menus = MasterMenu.all
     @master_menus = MasterMenu.page(params[:page]).per(6)

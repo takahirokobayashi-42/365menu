@@ -1,8 +1,8 @@
 <%= form_with model: @master_dish, url: master_dishes_path, method: :post, local:true do |f| %>
+  <div class="admins-alert">
+    <%= render "layouts/error_msg", resource: @master_dish %>
+  </div>
   <div class="masterdish-new">
-    <div class="admins-alert">
-      <%= render "layouts/error_msg", resource: @master_dish %>
-    </div>
     <div class="left-box">
       <div class="left-box__dish-name">
         レシピ名
@@ -29,7 +29,6 @@
           </tr>
         </thead>
         <tbody>
-
           <tr>
              <%= f.fields_for :dish_foodstuffs do |t| %>
             <td>
@@ -52,8 +51,5 @@
   <%= f.text_area :recipe %></br>
   <%= f.submit "登録する" %>
 </div>
-  <% f.hidden_field :is_master, :value => false %>
-  <% f.hidden_field :customer_id, :value => current_customer.id %>
 
 <% end %>
-<script src="app.js"></script>

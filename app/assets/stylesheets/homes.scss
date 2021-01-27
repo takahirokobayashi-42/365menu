@@ -3,27 +3,25 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .about__introduction{
-    text-align: center;
-    width: 80%;
-    min-height: 600px;
-    margin: auto;
-    background-size: 100% 100%;
-    background-image: image-url("about_image.jpg");
-}
-
-.about__introduction-text{
-  color: white;
-  font-weight: 600;
-  font-size: 30px;
-  width: 100%;
-  padding-top: 100px;
-  padding-bottom: 50px;
-}
-
-.about__introduction-text-sub{
+  text-align: center;
+  width: 80%;
+  min-height: 600px;
+  margin: auto;
+  background-size: 100% 100%;
+  background-image: image-url("about_image.jpg");
+  &-text{
     color: white;
-    font-weight: 200;
-    font-size: 15px;
+    font-weight: 600;
+    font-size: 30px;
+    width: 100%;
+    padding-top: 100px;
+    padding-bottom: 50px;
+  }
+  &-text-sub{
+  color: white;
+  font-weight: 200;
+  font-size: 15px;
+  }
 }
 .about__sub-introduction{
     text-align: center;
@@ -39,4 +37,10 @@
 .about__sub-introduction-feature-icon{
     color: green;
     font-size: 5em;
+}
+.about__sub-introduction-feature-box{
+  text-align: center;
+  h5{
+    color: #000;
+  }
 }
