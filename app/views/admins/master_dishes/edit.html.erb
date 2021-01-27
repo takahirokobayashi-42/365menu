@@ -17,21 +17,21 @@
     <div class="right-box__genre">
       ジャンル名<%= f.collection_select :genre_id, Genre.where(is_active: 1), :id, :name, include_blank: "選択して下さい", :size=>"40" %>
     </div class="nested-fields">
-     
+
             食材
             <!--追加ボタン　association_insertion_nodeでどこに追加したフォームを表示させるか記述している-->
             <%= link_to_add_association "追加", f, :dish_foodstuffs,  data: {association_insertion_node: '#test',association_insertion_method: 'append' } %>
             <%=f.text_field :count, :size=>"5" %>人分
-        
+
               <!-- 食材入力フィールド -->
               <%= f.fields_for :dish_foodstuffs do |t| %>
               <%= render "master_dishes/dish_foodstuff_fields", f: t %>
               <% end %>
-           
+
             <div id="test">
              <!-- 食材追加ボタン -->
             </div>
-     
+
     </div>
   </div>
 <div class="master-dish__recipe">
@@ -41,3 +41,6 @@
 </div>
   <%= f.hidden_field :is_master, :value => true %>
 <% end %>
+<script>
+$('.select').select2();
+</script>

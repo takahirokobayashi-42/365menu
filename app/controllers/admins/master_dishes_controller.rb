@@ -2,25 +2,26 @@ class Admins::MasterDishesController < ApplicationController
   def index
     @master_dishes = MasterDish.all
     @master_dishes = MasterDish.page(params[:page]).per(6)
+    master_dishes = MasterDish.all #データを全て取得
+    master_dishes = master_dishes.map(&:name) #:nameを取り出し、戻り値として配列で作成
+    respond_to do |format| #respondo_to=指定した形式で返すようにするメソッド
+    format.html
+    format.json{ render json: master_dishes.to_json }
+    end
   end
 
   def new
     @master_dish = MasterDish.new
     @dish_foodstuff = @master_dish.dish_foodstuffs.build
-    foodstuffs = Foodstuff.all #データを全て取得
-    foodstuffs = foodstuffs.map(&:name) #:nameを取り出し、戻り値として配列で作成
-    respond_to do |format| #respondo_to=指定した形式で返すようにするメソッド
-    format.html
-    format.json{ render json: foodstuffs.to_json }
-    end
+
   end
 
   def auto_complete
-    foodstuffs = Foodstuff.select(:name).where("name like '%" + params[:term] + "%'").order(:name)
+    master_dishes = MasterDish.select(:name).where("name like '%" + params[:term] + "%'").order(:name)
     logger.info '*' * 100
     logger.info '*' * 100
-    foodstuffs = foodstuffs.map(&:name)
-    render json: foodstuffs.to_json
+    master_dishes = master_dishes.map(&:name)
+    render json: master_dishes.to_json
   end
 
   def create

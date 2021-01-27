@@ -19,6 +19,7 @@
 //= require turbolinks
 //= require_tree .
 //= require cocoon
+//= require select2
 
 // ターボリンクスを無効化　画像のプレビュー機能
 $(document).on('turbolinks:load', function() {
@@ -43,4 +44,10 @@ $(document).on('turbolinks:load', function() {
     $('#sp-menu').fadeToggle();
     event.preventDefault();
   });
+});
+
+// select2を使用できるようにする
+$('.select').select2({
+  width: 200,
+  allowClear: true
 });
