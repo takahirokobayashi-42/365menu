@@ -1,6 +1,6 @@
 class Admins::MasterDishesController < ApplicationController
   
-  
+   before_action :authenticate_admin!
   
   def index
     @master_dishes = MasterDish.all

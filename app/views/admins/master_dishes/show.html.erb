@@ -56,7 +56,7 @@
   <!--作り方-->
   <div class="master-dish__show2--recipe">
     <p>作り方</p>
-    <p><%= @master_dish.recipe %></p>
+    <p><%= simple_format(@master_dish.recipe) %></p>
   </div>
     <div class="master-dish__show2--icon-count">
       <!--コメント-->

@@ -1,15 +1,8 @@
 <div class="nested-fields">
-  <table>
-  <tr>
-    <td>
-    <%= f.collection_select(:foodstuff_id, Foodstuff.all, :id, :name, {}) %>
-    </td>
-    <td>
-    <%= f.text_field :amount, :size=>"5" %>g
-    </td>
-    <td>
+    <%= f.collection_select(:foodstuff_id, Foodstuff.all, :id, :name, {}, class: "select") %>
+    <%= f.number_field :amount, class: "nested-fields__field" %>g
     <%= link_to_remove_association "削除", f %>
-    </td>
-    </tr>
-    </table>
 </div>
+<script>
+$('.select').select2();
+</script>

@@ -30,9 +30,8 @@
           </tr>
         </thead>
         <tbody>
-
           <tr>
-             <% f.fields_for :dish_foodstuffs do |task| %>
+             <%= f.fields_for :dish_foodstuffs do |task| %>
             <td>
               <!-- 食材入力フィールド -->
               <%= render "master_dishes/dish_foodstuff_fields", f: task %>
