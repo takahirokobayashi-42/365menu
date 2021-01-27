@@ -27,3 +27,15 @@ CSV.foreach('db/foodstuff.csv', headers: true) do |row|
     fat: row['fat']
   )
 end
+
+CSV.foreach('db/genre.csv', headers: true) do |row|
+  Genre.create(
+    name: row['name']
+  )
+end
+
+CSV.foreach('db/menu-genre.csv', headers: true) do |row|
+  MenuGenre.create(
+    name: row['name']
+  )
+end
