@@ -4,8 +4,8 @@
     <!--レシピ基本情報-->
     <% @master_dish.each do |master_dish| %>
     <div class="info__table">
-    <div class="info__table--element">
-      <div class="test">
+    <div class="table__element">
+      <div class=element__detail>
         <%= attachment_image_tag master_dish, :image, :fill, 250, 250, format: 'jpeg' %></br>
 
         <%= link_to master_dish_path(master_dish.id) do %>
@@ -22,7 +22,7 @@
     </div>
     <% end %>
   </div>
-  <%= paginate(@master_dishes) %>
+  <%= paginate(@master_dish) %>
 </div>
 
 
@@ -40,7 +40,7 @@
               <th>名前</th>
             </tr>
           </thead>
-    
+
           <tbody>
             <% @customer.each do |customer| %>
             <tr>
@@ -63,10 +63,10 @@
     <!--メニュー基本情報-->
   <% @master_menu.each do |master_menu| %>
     <div class="info__table">
-      <div class="info__table--element">
-        <div class="test">
+      <div class="table__element">
+        <div class="element__detail">
           <%= attachment_image_tag master_menu, :image, :fill, 250, 250, format: 'jpeg' %></br>
-  
+
           <%= link_to admins_master_menu_path(master_menu.id) do %>
             <%= master_menu.name %>
           <% end %>
@@ -80,7 +80,7 @@
       </div>
     </div>
   <% end %>
-  <%= paginate(@master_menus) %>
+  <%= paginate(@master_menu) %>
   </div>
 </div>
 <% end %>
