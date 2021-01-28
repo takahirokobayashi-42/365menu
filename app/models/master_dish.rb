@@ -18,5 +18,6 @@ class MasterDish < ApplicationRecord
   end
 
   validates :genre_id, :name, :recipe, :count, presence: true
+  validates :count, numericality: {greater_than_or_equal_to: 1}
 
 end

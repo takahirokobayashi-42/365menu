@@ -28,13 +28,22 @@ class Admins::MasterDishesController < ApplicationController
 
   def create
     @master_dish = MasterDish.new(master_dish_params)
+    # 各栄養素を計算
+    # レシピの食材の重量　何人前が　nil または　重量が０g以下　1人前以内の場合breakさせてmodelのvalidationでerrorを表示させる
     @master_dish.dish_foodstuffs.each do |dish_foodstuff|
-      @master_dish.total_protein += ((dish_foodstuff.foodstuff.protein*(dish_foodstuff.amount/100))/@master_dish.count).round
-      @master_dish.total_carbohydrate += ((dish_foodstuff.foodstuff.carbohydrate*(dish_foodstuff.amount/100))/@master_dish.count).round
-      @master_dish.total_fat += ((dish_foodstuff.foodstuff.fat*(dish_foodstuff.amount/100))/@master_dish.count).round
-      @master_dish.total_calory += (dish_foodstuff.foodstuff.calory*(dish_foodstuff.amount/100)/@master_dish.count).round
+      if dish_foodstuff.amount != nil && @master_dish.count != nil
+        if dish_foodstuff.amount > 0 && @master_dish.count >= 1
+          @master_dish.total_protein += (((dish_foodstuff.foodstuff.protein/100)*dish_foodstuff.amount)/@master_dish.count).round
+          @master_dish.total_carbohydrate += (((dish_foodstuff.foodstuff.carbohydrate/100)*dish_foodstuff.amount)/@master_dish.count).round
+          @master_dish.total_fat += (((dish_foodstuff.foodstuff.fat/100)*dish_foodstuff.amount)/@master_dish.count).round
+          @master_dish.total_calory += (((dish_foodstuff.foodstuff.calory/100)*dish_foodstuff.amount)/@master_dish.count).round
+        else
+         break
+        end
+      else
+        break
+      end
     end
-
     if @master_dish.save
       redirect_to master_dishes_path
     else
@@ -56,15 +65,25 @@ class Admins::MasterDishesController < ApplicationController
 
   def update
     @master_dish = MasterDish.find(params[:id])
+    # 保存されている各栄養素をリセット
     @master_dish.total_calory = 0
     @master_dish.total_carbohydrate = 0
     @master_dish.total_fat = 0
     @master_dish.total_protein = 0
+    # 各栄養素を計算
     @master_dish.dish_foodstuffs.each do |dish_foodstuff|
-      @master_dish.total_protein += ((dish_foodstuff.foodstuff.protein*(dish_foodstuff.amount/100))/@master_dish.count).round
-      @master_dish.total_carbohydrate += ((dish_foodstuff.foodstuff.carbohydrate*(dish_foodstuff.amount/100))/@master_dish.count).round
-      @master_dish.total_fat += ((dish_foodstuff.foodstuff.fat*(dish_foodstuff.amount/100))/@master_dish.count).round
-      @master_dish.total_calory += (dish_foodstuff.foodstuff.calory*(dish_foodstuff.amount/100)/@master_dish.count).round
+      if dish_foodstuff.amount != nil && @master_dish.count != nil
+        if dish_foodstuff.amount > 0 && @master_dish.count >= 1
+          @master_dish.total_protein += (((dish_foodstuff.foodstuff.protein/100)*dish_foodstuff.amount)/@master_dish.count).round
+          @master_dish.total_carbohydrate += (((dish_foodstuff.foodstuff.carbohydrate/100)*dish_foodstuff.amount)/@master_dish.count).round
+          @master_dish.total_fat += (((dish_foodstuff.foodstuff.fat/100)*dish_foodstuff.amount)/@master_dish.count).round
+          @master_dish.total_calory += (((dish_foodstuff.foodstuff.calory/100)*dish_foodstuff.amount)/@master_dish.count).round
+        else
+         break
+        end
+      else
+        break
+      end
     end
     if @master_dish.update(master_dish_params)
       if admin_signed_in?

@@ -11,4 +11,5 @@ class MasterMenu < ApplicationRecord
   end
   
   validates :menu_genre_id, :name, :count, presence: true 
+  validates :count, numericality: {greater_than_or_equal_to: 1}
 end
