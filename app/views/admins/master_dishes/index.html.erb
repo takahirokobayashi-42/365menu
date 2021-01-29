@@ -1,7 +1,9 @@
 <div class="master-dish-index">
   <%= render "searches/search_form" %>
   <div class="master-dish-index__info">
-    <%= link_to "投稿する", new_admins_master_dish_path %>
+    <div style="width: 100%;">
+      <%= link_to "投稿する", new_admins_master_dish_path %>
+    </div>
     <!--レシピ基本情報-->
     <% @master_dishes.each do |master_dish| %>
     <div class="info__table">
