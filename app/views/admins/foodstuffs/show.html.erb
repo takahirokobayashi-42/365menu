@@ -2,6 +2,14 @@
   <h1>
   <%= @foodstuff.name %>
   </h1>
+   <p>
+    <%= link_to edit_admins_foodstuff_path(@foodstuff.id) do %>
+      編集
+    <% end %>
+    <%= link_to admins_foodstuffs_path do %>
+      戻る
+    <% end %>
+  </p>
   <table>
     <tr>
       <td>カテゴリー</td>
@@ -24,12 +32,4 @@
       <td><%= @foodstuff.fat %>g</td>
     </tr>
   </table>
-  <div class="foodstuff-show__subtab">
-    <%= link_to edit_admins_foodstuff_path(@foodstuff.id) do %>
-    編集
-    <% end %>
-    <%= link_to admins_foodstuffs_path do %>
-    戻る
-    <% end %>
-  </div>
 </div>
