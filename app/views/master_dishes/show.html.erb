@@ -70,7 +70,7 @@
       <!--コメント-->
       <p>コメント件数：<%= @master_dish.post_comments.count %></p>
       <!--いいね-->
-    <% if current_admin.present? || current_customer.present? %>
+    <% if current_customer.present? %>
       <% if @master_dish.favorited_by?(current_customer) %>
     <p>
       <%= link_to master_dish_favorites_path(@master_dish), method: :delete do %>

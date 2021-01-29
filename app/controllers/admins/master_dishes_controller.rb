@@ -45,7 +45,7 @@ class Admins::MasterDishesController < ApplicationController
       end
     end
     if @master_dish.save
-      redirect_to master_dishes_path
+      redirect_to admins_master_dishes_path
     else
       @master_dishes = MasterDish.all
       render "new"
