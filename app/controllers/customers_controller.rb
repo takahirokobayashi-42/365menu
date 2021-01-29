@@ -1,11 +1,11 @@
 class CustomersController < ApplicationController
 
   def show
-    @master_dishes=MasterDish.where(customer_id: current_customer.id)
-    @master_dishes=MasterDish.page(params[:page]).reverse_order.per(5)
-    @master_menus=MasterMenu.where(customer_id: current_customer.id)
-    @master_menus=MasterMenu.page(params[:page]).reverse_order.per(5)
     @customer=Customer.find(params[:id])
+    @master_dishes=MasterDish.where(customer_id: @customer)
+    @master_dishes=MasterDish.page(params[:page]).reverse_order.per(5)
+    @master_menus=MasterMenu.where(customer_id: @customer)
+    @master_menus=MasterMenu.page(params[:page]).reverse_order.per(5)
   end
 
   def edit
