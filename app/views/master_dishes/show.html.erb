@@ -3,12 +3,15 @@
   <p class="show__head--title"><%= @master_dish.name %></p>
   <p class="show__head--post">投稿者
     <% if @master_dish.is_master == true %>
-    365menu
+      365menu
     <% else %>
-    <%= Customer.find(@master_dish.customer_id).name %>
+      <%= link_to customer_path(@master_dish.customer_id) do %>
+        <%= Customer.find(@master_dish.customer_id).name %>
+      <% end %>
     <% end %>
   </p>
   <p class="show__head--edit">
+  <% if current_admin.present? || current_customer.present? %>
     <% if @master_dish.is_master == true %>
       <% if current_admin.present? %>
         <%= link_to "編集", edit_master_dish_path(@master_dish) %>
@@ -16,6 +19,7 @@
     <% elsif @master_dish.customer_id == current_customer.id %>
       <%= link_to "編集", edit_master_dish_path(@master_dish) %>
     <% end %>
+  <% end %>
   </p>
   <%= attachment_image_tag @master_dish, :image, :fill, 400, 400, format: 'jpeg' %></br>
   </div>
@@ -62,6 +66,7 @@
       <!--コメント-->
       <p>コメント件数：<%= @master_dish.post_comments.count %></p>
       <!--いいね-->
+    <% if current_admin.present? || current_customer.present? %>
       <% if @master_dish.favorited_by?(current_customer) %>
     <p>
       <%= link_to master_dish_favorites_path(@master_dish), method: :delete do %>
@@ -74,6 +79,9 @@
         ♡<%= @master_dish.favorites.count %> いいね
       <% end %>
     </p>
+    <% end %>
+  <% else %>
+  <p> ♡<%= @master_dish.favorites.count %> いいね</p>
   <% end %>
     </div>
 

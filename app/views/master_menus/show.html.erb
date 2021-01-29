@@ -3,14 +3,18 @@
   <p class="show__head--title"><%= @master_menu.name %></p>
   <p class="show__head--post">投稿者
     <% if @master_menu.is_master == true %>
-    365menu
+      365menu
     <% else %>
-    <%= Customer.find(@master_menu.customer_id).name %>
+    <%= link_to customer_path(@master_menu.customer_id) do %>
+        <%= Customer.find(@master_menu.customer_id).name %>
+      <% end %>
     <% end %>
   </p>
   <p class="show__head--edit">
-    <% if @master_menu.customer_id == current_customer.id %>
-    <%= link_to "編集", edit_master_menu_path(@master_menu) %>
+    <% if current_customer.present? %>
+      <% if @master_menu.customer_id == current_customer.id %>
+        <%= link_to "編集", edit_master_menu_path(@master_menu) %>
+      <% end %>
     <% end %>
   </p>
   <%= attachment_image_tag @master_menu, :image, :fill, 400, 400, format: 'jpeg' %></br>
