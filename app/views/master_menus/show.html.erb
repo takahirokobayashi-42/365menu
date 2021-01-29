@@ -17,7 +17,27 @@
       <% end %>
     <% end %>
   </p>
-  <%= attachment_image_tag @master_menu, :image, :fill, 400, 400, format: 'jpeg' %></br>
+  <%= attachment_image_tag @master_menu, :image, :fill, 500, 500, format: 'jpeg' %></br>
+
+  <div class="show__nutrients">
+    <p>1人前当たり</p>
+    <table>
+      <!--上記の栄養素を表示-->
+      <tr>
+        <td>カロリー:<%= @master_menu.master_dishes.sum(:total_calory)/@master_menu.count%>kcal</td>
+      </tr>
+      <tr>
+        <td>タンパク質:<%= @master_menu.master_dishes.sum(:total_protein)/ @master_menu.count %>g</td>
+      </tr>
+      <tr>
+        <td>炭水化物:<%= @master_menu.master_dishes.sum(:total_carbohydrate)/ @master_menu.count %>g</td>
+      </tr>
+      <tr>
+        <td>脂質:<%= @master_menu.master_dishes.sum(:total_fat)/ @master_menu.count %>g</td>
+      </tr>
+    </table>
+  </div>
+
   </div>
 
   <div class="show__foodstuff">
@@ -34,29 +54,7 @@
       <% end %>
     </table>
   </div>
-</div>
-<div class="master-dish__show2">
-  <div class="master-dish__show2--nutrients">
-    <p>1人前当たり</p>
-    <table>
-      <!--上記の栄養素を表示-->
-      <tr>
-        <td>カロリー:<%= @master_menu.master_dishes.sum(:total_calory)/ @master_menu.count %>kcal</td>
-      </tr>
-      <tr>
-        <td>タンパク質:<%= @master_menu.master_dishes.sum(:total_protein)/ @master_menu.count %>g</td>
-      </tr>
-      <tr>
-        <td>炭水化物:<%= @master_menu.master_dishes.sum(:total_carbohydrate)/ @master_menu.count %>g</td>
-      </tr>
-      <tr>
-        <td>脂質:<%= @master_menu.master_dishes.sum(:total_fat)/ @master_menu.count %>g</td>
-      </tr>
-    </table>
-  </div>
-  <div>
-    <%= link_to master_menus_path do %>
+  <%= link_to master_menus_path do %>
     戻る
-    <% end %>
-  </div>
+  <% end %>
 </div>

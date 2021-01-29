@@ -106,12 +106,40 @@ textarea{
       text-align: right
     }
   }
+
+   .show__nutrients{
+  width: 450px;
+  text-align: center;
+  p{
+    margin-top: 30px;
+  }
+
+  table{
+    margin: auto;
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 50%;
+    td{
+      border-bottom: solid 1px black;
+      }
+    }
+    table td{
+    text-align: center;
+    width: 25%;
+    padding: 15px 0;
+    }
+  }
+
+
   .show__foodstuff{
     width: 450px;
     text-align: center;
+    margin-left: 50px;
+    margin-top: 50px;
     @media(min-width: 1000px){
     width: 500px;
     text-align: left;
+    margin-left: 100px;
     }
     @media(max-width: 1000px){
       table{
@@ -140,28 +168,7 @@ textarea{
   }
 }
 .master-dish__show2{
-  &--nutrients{
-  width: 450px;
-  text-align: center;
-  p{
-    margin-top: 30px;
-  }
 
-  table{
-    margin: auto;
-    border-collapse: collapse;
-    border-spacing: 0;
-    width: 50%;
-    td{
-      border-bottom: solid 1px black;
-      }
-    }
-    table td{
-    text-align: center;
-    width: 25%;
-    padding: 15px 0;
-    }
-  }
   &--recipe{
     margin-left: 50px;
     max-width: 600px;
