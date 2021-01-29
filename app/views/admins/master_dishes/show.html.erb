@@ -17,25 +17,9 @@
       <%= link_to "編集", edit_master_dish_path(@master_dish) %>
     <% end %>
   </p>
-  <%= attachment_image_tag @master_dish, :image, :fill, 400, 400, format: 'jpeg' %></br>
-  </div>
+  <%= attachment_image_tag @master_dish, :image, :fill, 500, 500, format: 'jpeg' %></br>
 
-  <div class="show__foodstuff">
-    <p>材料(<%= @master_dish.count %>人分)</p>
-  <table>
-  <% @dish_foodstuffs.each do |dish_foodstuff| %>
-    <% if dish_foodstuff.master_dish_id == @master_dish.id %>
-    <tr>
-      <td><%= dish_foodstuff.foodstuff.name %></td>
-      <td><%= dish_foodstuff.amount %>g</td>
-      </tr>
-    <% end %>
-  <% end %>
-  </table>
-  </div>
-  </div>
-  <div class="master-dish__show2">
-  <div class="master-dish__show2--nutrients">
+  <div class="show__nutrients">
     <p>1人前当たり</p>
     <table>
       <!--上記の栄養素を表示-->
@@ -53,6 +37,25 @@
       </tr>
     </table>
   </div>
+
+  </div>
+
+  <div class="show__foodstuff">
+    <p>材料(<%= @master_dish.count %>人分)</p>
+  <table>
+  <% @dish_foodstuffs.each do |dish_foodstuff| %>
+    <% if dish_foodstuff.master_dish_id == @master_dish.id %>
+    <tr>
+      <td><%= dish_foodstuff.foodstuff.name %></td>
+      <td><%= dish_foodstuff.amount %>g</td>
+      </tr>
+    <% end %>
+  <% end %>
+  </table>
+  </div>
+  </div>
+  <div class="master-dish__show2">
+
   <!--作り方-->
   <div class="master-dish__show2--recipe">
     <p>作り方</p>

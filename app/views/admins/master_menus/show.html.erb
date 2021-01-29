@@ -14,25 +14,8 @@
     <% end %>
   </p>
   <%= attachment_image_tag @master_menu, :image, :fill, 400, 400, format: 'jpeg' %></br>
-  </div>
 
-  <div class="show__foodstuff">
-    <p>献立(<%= @master_menu.count %>人分)</p>
-    <table>
-      <% @master_menu_recipes.each do |master_menu_recipe| %>
-      <tr>
-        <td>
-          <%= link_to master_dish_path(master_menu_recipe.master_dish_id) do %>
-          <%= master_menu_recipe.master_dish.name %>
-          <% end %>
-        </td>
-      </tr>
-      <% end %>
-    </table>
-  </div>
-</div>
-<div class="master-dish__show2">
-  <div class="master-dish__show2--nutrients">
+  <div class="show__nutrients">
     <p>1人前当たり</p>
     <table>
       <!--上記の栄養素を表示-->
@@ -50,9 +33,22 @@
       </tr>
     </table>
   </div>
-  <div>
-    <%= link_to master_menus_path do %>
+
+  <div class="show__foodstuff">
+    <p>献立(<%= @master_menu.count %>人分)</p>
+    <table>
+      <% @master_menu_recipes.each do |master_menu_recipe| %>
+      <tr>
+        <td>
+          <%= link_to master_dish_path(master_menu_recipe.master_dish_id) do %>
+          <%= master_menu_recipe.master_dish.name %>
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+    </div>
+  <%= link_to master_menus_path do %>
     戻る
-    <% end %>
-  </div>
+  <% end %>
 </div>

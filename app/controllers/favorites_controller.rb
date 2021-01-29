@@ -1,4 +1,7 @@
 class FavoritesController < ApplicationController
+
+  before_action :authenticate_customer!
+
   def create
     master_dish = MasterDish.find(params[:master_dish_id])
     favorite = current_customer.favorites.new(master_dish_id: master_dish.id)

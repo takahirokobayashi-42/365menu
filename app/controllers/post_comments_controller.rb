@@ -1,4 +1,7 @@
 class PostCommentsController < ApplicationController
+
+  before_action :authenticate_customer!
+
   def create
     master_dish = MasterDish.find(params[:master_dish_id])
     comment = current_customer.post_comments.new(post_comment_params)
