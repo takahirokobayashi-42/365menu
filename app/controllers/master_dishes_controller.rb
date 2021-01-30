@@ -57,7 +57,7 @@ class MasterDishesController < ApplicationController
       end
     else
       @master_dishes = MasterDish.all
-      render "new"
+      render "admins/master_menus/new"
     end
   end
 

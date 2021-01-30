@@ -18,8 +18,7 @@ class Admins::MasterMenusController < ApplicationController
     if @master_menu.save
       redirect_to admins_master_menus_path
     else
-      @master_menus = MasterMenu.all
-      redirect_to root_path
+      render "new"
     end
   end
 
