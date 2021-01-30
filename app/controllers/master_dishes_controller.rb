@@ -56,8 +56,7 @@ class MasterDishesController < ApplicationController
         redirect_to master_dishes_path
       end
     else
-      @master_dishes = MasterDish.all
-      render "admins/master_menus/new"
+      render "new"
     end
   end
 
@@ -100,7 +99,6 @@ class MasterDishesController < ApplicationController
         redirect_to master_dish_path(@master_dish.id)
       end
     else
-      @master_dish = MasterDish.find(params[:id])
       render "edit"
     end
   end

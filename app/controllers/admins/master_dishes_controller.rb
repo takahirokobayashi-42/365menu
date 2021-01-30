@@ -47,7 +47,6 @@ class Admins::MasterDishesController < ApplicationController
     if @master_dish.save
       redirect_to admins_master_dishes_path
     else
-      @master_dishes = MasterDish.all
       render "new"
     end
   end
@@ -92,7 +91,6 @@ class Admins::MasterDishesController < ApplicationController
         redirect_to master_dish_path(@master_dish.id)
       end
     else
-      @master_dish = MasterDish.find(params[:id])
       render "edit"
     end
   end
