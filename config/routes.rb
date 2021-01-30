@@ -28,6 +28,9 @@ Rails.application.routes.draw do
   resources :master_dishes do
     resource :favorites, only: [:create, :destroy]
     resources :post_comments, only: [:create, :destroy]
+    collection do
+        get "auto_complete"
+    end
   end
   resources :customers, only: [:show, :edit, :update]
   patch '/customers/:id/hide' => 'customers#hide'
