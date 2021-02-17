@@ -8,9 +8,6 @@ class CustomersController < ApplicationController
     @master_menus=MasterMenu.page(params[:page]).reverse_order.per(5)
   end
 
-  def edit
-  end
-
   def update
     if current_customer.update(customer_params)
       redirect_to customer_path

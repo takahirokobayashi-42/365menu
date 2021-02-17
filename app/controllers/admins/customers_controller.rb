@@ -23,8 +23,6 @@ class Admins::CustomersController < ApplicationController
     end
   end
 
-  def hide
-  end
 
   private
   def customer_params
