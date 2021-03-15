@@ -1,15 +1,15 @@
 require "rails_helper"
 
-RSpec.describe Admins::CategoriesController, type: :request do
+RSpec.describe Admins::GenresController, type: :request do
   let(:admin) { create(:admin) }
-  let!(:category) { create(:category) }
-  let(:category_vegetable) { create(:category_vegetable) }
+  let!(:genre) { create(:genre) }
+  let(:genre_vegetable) { create(:genre_vegetable) }
 
   describe "Get #index" do
     context "ログイン済みの場合" do
       before do
         sign_in admin
-        get admins_categories_url
+        get admins_genres_url
       end
 
       it "リクエストは200 OK" do
@@ -23,7 +23,7 @@ RSpec.describe Admins::CategoriesController, type: :request do
 
     context "ログインしていない場合" do
       before do
-        get admins_categories_url
+        get admins_genres_url
       end
 
       it "リクエストは302 リダイレクト" do
@@ -40,20 +40,20 @@ RSpec.describe Admins::CategoriesController, type: :request do
     context "ログイン済みの場合" do
       before do
         sign_in admin
-        get edit_admins_category_url category.id
+        get edit_admins_genre_url genre.id
       end
 
       it "リクエストは200 OK" do
         expect(response.status).to eq 200
       end
-      it "カテゴリー表示されている" do
+      it "ジャンル表示されている" do
         expect(response.body).to include "肉類"
       end
     end
 
     context "ログインしていない場合" do
       before do
-        get edit_admins_category_url category.id
+        get edit_admins_genre_url genre.id
       end
 
       it "リクエストは302 リダイレクト" do
@@ -74,25 +74,25 @@ RSpec.describe Admins::CategoriesController, type: :request do
       end
 
       it "editページに飛んでいるか" do
-        visit admins_categories_path
+        visit admins_genres_path
         click_link "編集する"
-        expect(page).to have_content("カテゴリー編集")
-        expect(page).to have_current_path "/admins/categories/1/edit"
+        expect(page).to have_content("ジャンル編集")
+        expect(page).to have_current_path "/admins/genres/1/edit"
       end
 
       it "リクエストは302 リダイレクト" do
-        patch admins_category_url category, params: { category: attributes_for(:category_vegetable) }
+        patch admins_genre_url genre, params: { genre: attributes_for(:genre_vegetable) }
         expect(response.status).to eq 302
       end
-      it "カテゴリーが更新されていること" do
+      it "ジャンルが更新されていること" do
         expect do
-        patch admins_category_url category, params: { category: attributes_for(:category_vegetable) }
-        end.to change { Category.find(category.id).name }.from("肉類").to("野菜類")
+        patch admins_genre_url genre, params: { genre: attributes_for(:genre_vegetable) }
+        end.to change { Genre.find(genre.id).name }.from("肉類").to("野菜類")
       end
 
-      it "更新した後カテゴリー一覧ページにリダイレクトされること" do
-        patch admins_category_url category, params: { category: attributes_for(:category_vegetable) }
-        expect(response).to redirect_to(admins_categories_path)
+      it "更新した後ジャンル一覧ページにリダイレクトされること" do
+        patch admins_genre_url genre, params: { genre: attributes_for(:genre_vegetable) }
+        expect(response).to redirect_to(admins_genres_path)
       end
     end
 
@@ -102,16 +102,16 @@ RSpec.describe Admins::CategoriesController, type: :request do
       end
 
       it "リクエストは200 OK" do
-        patch admins_category_url category, params: { category: attributes_for(:category, name:nil) }
+        patch admins_genre_url genre, params: { genre: attributes_for(:genre, name:nil) }
         expect(response.status).to eq 200
       end
-      it "カテゴリーの名前が更新されないこと" do
+      it "ジャンルの名前が更新されないこと" do
         expect do
-          patch admins_category_url category, params: { category: attributes_for(:category, name:nil) }
-        end.not_to change(Category.find(category.id), :name)
+          patch admins_genre_url genre, params: { genre: attributes_for(:genre, name:nil) }
+        end.not_to change(Genre.find(genre.id), :name)
       end
       it "エラーが表示されること" do
-        patch admins_category_url category, params: { category: attributes_for(:category, name:nil) }
+        patch admins_genre_url genre, params: { genre: attributes_for(:genre, name:nil) }
         expect(response.body).to include "Nameを入力してください"
       end
     end
@@ -124,17 +124,17 @@ RSpec.describe Admins::CategoriesController, type: :request do
     end
 
     it "リクエストは302 リダイレクト" do
-      delete admins_category_url category
+      delete admins_genre_url genre
       expect(response.status).to eq 302
     end
     it "学習記録が削除されること" do
       expect do
-        delete admins_category_url category
-      end.to change(Category, :count).by(-1)
+        delete admins_genre_url genre
+      end.to change(Genre, :count).by(-1)
     end
     it "学習記録一覧ページにリダイレクトされること" do
-      delete admins_category_url category
-      expect(response).to redirect_to admins_categories_url
+      delete admins_genre_url genre
+      expect(response).to redirect_to admins_genres_url
     end
   end
 end

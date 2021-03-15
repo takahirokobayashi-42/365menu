@@ -1,6 +1,6 @@
 <div class="top">
-<br>
 <strong class="admins-title-name">ジャンル編集</strong>
+<%= render "layouts/error_msg", resource: @genre %>
 
 <%= form_for @genre, :url => {:action => :update} do |f| %>
 
